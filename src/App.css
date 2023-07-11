@@ -1,38 +1,759 @@
-.App {
-  text-align: center;
+/* DEFAULT PAGE LAYOUT */
+body{
+  margin: 0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.topNav .topNavMid .currentActiveTab{
+  color: var(--color_eight);
+}
+
+button.goUp{
+  position: fixed;
+  float: right;
+  bottom: 20px;
+  z-index: 3;
+  right: 50px;
+  background-color: var(--color_one);
+  color: #0ebcf6;
+  padding: var(--padding_one);
+  border-radius: 50%;
+  font-size: large;
+  transition: var(--transition_one);
+  display: none;
+  place-items: center;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 15px 5px rgb(72, 72, 72);
+}
+button.goUp:hover{
+  transform: scale(.9);
+  box-shadow: none;
+}
+
+:root{
+  --color_one: #e1ddd2;
+  --color_two: #3d3a50;
+  --color_three: #0ebcf6;
+  --color_four: #555a54;
+  --color_five: rgb(37, 110, 37);
+  --color_six: rgb(215, 35, 35);
+  --color_seven: rgb(0, 82, 0);
+  --color_eight: darkorange;
+  --color_nine: #f7f2ef;
+  --color_ten: #bfbbaf;
+  --gap_one_px: 25px;
+  --transition_one: 150ms;
+  --padding_one: 20px;
+  --padding_two: 10px;
+  --border_radius: 10px;
+  --input_margins: 20px;
+  --input_margins2: 7.5px;
+  --shadow: 0 0 12px 2px rgb(193, 193, 193);
+  --shadow2: 0 0 8px 2px rgb(206, 206, 206);
+  --shadow2: 0 0 8px 2px rgb(206, 206, 206);
+  --shadow3: 10px 15px 10px 0px rgb(202, 202, 202);
+  --shadow4: 10px 10px 10px 0px rgb(187, 187, 187);
+  --transform: scaleX(1.1);
+}
+
+::-webkit-scrollbar{
+  width: 0;
+}
+::-webkit-scrollbar-thumb{
+  background-color: var(--color_two);
+}
+::selection{
+  background-color: var(--color_three);
+  color: var(--color_one);
+}
+::-moz-selection{
+  background-color: var(--color_three);
+  color: var(--color_one);
+}
+
+/* for mobile */
+@media screen and (max-width: 650px) {
+  .hasSearch{
+      position: absolute;
+      top: 0;
+      background-color: blue;
+  }
+  .topNav{
+      display: none;
+  }
+  .hasSearch .menuBtn{
+      display: flex;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.topNav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100vw;
+  background-color: var(--color_one);
+  padding: 0 20px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  transition: var(--transition_one);
+}
+
+.topNav ul li{
+  list-style: none;
+}
+.topNav .links{
+  text-decoration: none;
+  color: var(--color_four);
+  transition: var(--transition_one);
+}
+.topNav .links:hover{
+  color: var(--color_three);
+}
+
+
+
+.topNav .topNavLeft{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.topNav .topNavLeft .companyLink{
+  margin: 0 30px;
+  text-decoration: none;
+  color: var(--color_three);
+}
+
+.topNav .topNavMid{
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.topNav .topNavMid ul{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap_one_px);
+}
+
+
+.topNav .topNavRight{
+  position: relative;
+}
+.topNav .topNavRight ul{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap_one_px);
+  align-items: center;
+}
+
+.topNav .topNavRight ul li span{
+  color: var(--color_four);
+  position: relative;
+  font-size: larger;
+}
+.topNav .topNavRight ul li span sup{
+  color: var(--color_three);
+}
+
+/* default divs...where they render */
+.renderDivs{
+  padding: var(--padding_one);
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  width: 100%;
+  background-color: var(--color_four);
+}
+
+
+/* SIGN UP */
+.signupModal{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: var(--color_one);
+  z-index: 5;
+}
+.signupModal .signupFormPC{
+  display: flex;
+  flex-direction: row;
+  width: 80vw;
+  height: 85vh;
+  background-color: var(--color_one);
+  box-shadow: var(--shadow);
+  border-radius: var(--border_radius);
+  box-sizing: border-box;
+  justify-content: center;
+}
+.signupModal .signupFormMobile{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: max-content;
+  background-color: var(--color_one);
+  box-shadow: var(--shadow);
+  border-radius: var(--border_radius);
+  box-sizing: border-box;
+  justify-content: center;
+}
+.signupModal form:hover{
+  box-shadow: var(--shadow2);
+}
+
+.signupModal form .signupLeft, .signupModal form .signupRight{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--padding_two);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  position: relative;
+  width: 50%;
+}
+
+.signupModal form label{
+  margin: var(--input_margins) 0;
+  color: var(--color_four);
+}
+.signupModal form label input, .signupModal form label select{
+  margin: 10px 0;
+  padding: 15px 5px;
+  outline: none;
+  border: none;
+  border-radius: var(--border_radius);
+  background-color: var(--color_one);
+  font-size: 15px;
+  font-weight: 300;
+  width: 75%;
+  box-shadow: var(--shadow3);
+  color: var(--color_four);
+  transition: var(--transition_one);
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.signupModal form label input:hover, .signupModal form label select:hover{
+  /* transform: translateY(4px); */
+  box-shadow: var(--shadow4);
+}
+.signupModal .eye{
+  background-color: var(--color_one);
+  color: var(--color_four);
+  padding: 15px;
+  margin: var(--input_margins);
+  font-size: 15px;
+  border-radius: var(--border_radius);
+  border: none;
+  outline: none;
+  box-shadow: var(--shadow3);
+  transition: var(--transition_one);
+}
+.signupModal .eye:hover{
+  box-shadow: none;
+}
+
+.signupModal .signupRight .hasSignupButtons{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.signupModal .signupRight .hasSignupButtons button[type="submit"]{
+  background-color: var(--color_five);
+  padding: var(--padding_one);
+  border: none;
+  outline: none;
+  border-radius: var(--border_radius);
+}
+.signupModal .signupRight .hasSignupButtons button[type="submit"]:hover{
+  background-color: rgb(46, 129, 46);
+}
+.signupModal .signupRight .hasSignupButtons button[type="button"]{
+  background-color: var(--color_six);
+  padding: var(--padding_one);
+  border: none;
+  outline: none;
+  border-radius: var(--border_radius);
+}
+.signupModal .signupRight .hasSignupButtons button[type="button"]:hover{
+  background-color: rgb(235, 38, 38);
+}
+.signupModal .signupRight p{
+  color: var(--color_four);
+}
+.signupModal .signupRight .goToLogin{
+  color: var(--color_three);
+}
+
+
+
+/* LOGIN */
+.loginModal{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  top: 0;
+  left: 0;
+  background-color: var(--color_one);
+  z-index: 5;
+}
+
+.loginModal .loginFormPC{
+  position: relative;
+  width: 500px;
+  box-shadow: var(--shadow);
+  border-radius: var(--border_radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color_four);
+  box-sizing: border-box;
+  transition: var(--transition_one);
+}
+.loginModal .loginFormMobile{
+  position: relative;
+  width: 100%;
+  box-shadow: var(--shadow);
+  border-radius: var(--border_radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color_four);
+  box-sizing: border-box;
+  transition: var(--transition_one);
+}
+
+.loginModal form:hover{
+  box-shadow: var(--shadow2);
+}
+
+.loginModal form label{
+  margin: var(--input_margins2) 0;
+  width: 100%;
+  padding: var(--padding_one);
+  color: var(--color_four);
+}
+
+.loginModal form input{
+  padding: var(--padding_one);
+  position: relative;
+  width: 100%;
+  margin: var(--input_margins) auto;
+  outline: none;
+  border: none;
+  background-color: var(--color_one);
+  color: var(--color_four);
+  box-shadow: var(--shadow3);
+  border-radius: var(--border_radius);
+  transition: var(--transition_one);
+  font-size: 15px;
+  font-weight: 300;
+
+}
+.loginModal form input:hover{
+  box-shadow: var(--shadow4);
+}
+
+.loginModal form button[type="submit"]{
+  background-color: var(--color_five);
+  padding: var(--padding_one);
+  border: none;
+  outline: none;
+  border-radius: var(--border_radius);
+  width: 90%;
+}
+.loginModal form button[type="submit"]:hover{
+  background-color: rgb(46, 129, 46);
+}
+.loginModal form .goToSignup{
+  color: var(--color_three);
+  text-decoration: underline;
+}
+
+.loginModal form .finishLogin{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.loginModal form .finishLogin button{
+  background-color: var(--color_six);
+  padding: var(--padding_one);
+  border: none;
+  outline: none;
+  border-radius: var(--border_radius);
+  margin: var(--input_margins);
+}
+.loginModal form .finishLogin button:hover{
+  background-color: rgb(235, 38, 38);
+}
+
+.hasSearch{
+  width: 100vw;
+  padding: var(--padding_two);
+  background-color: var(--color_one);
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 3;
+  top: 0;
+  box-shadow: 0 0 20px 0 black;
+  transition: var(--transition_one);
+}
+.hasSearch button{
+  background-color: var(--color_one);
+  padding: 0 var(--padding_two);
+  border-radius: var(--border_radius);
+  color: var(--color_four);
+  font-size: 25px;
+  border: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.hasSearch button:hover{
+  background-color: var(--color_three);
+  color: var(--color_one);
+  border: none;
+}
+
+.hasSearch input{
+  padding: var(--padding_two);
+  background-color: var(--color_one);
+  border: 1px solid var(--color_four);
+  border-radius: var(--border_radius);
+  outline: none;
+}
+.hasSearch input::placeholder{
+  color: var(--color_four);
+  font-style: italic;
+  opacity: .35;
+}
+
+
+/* ACTIONS */
+.actions{
+  background-color: var(--color_one);
+  display: none;
+  position: absolute;
+  outline: 2px groove var(--color_four);
+  box-sizing: border-box;
+  padding: 5px 10px;
+  border-radius: var(--border_radius);
+  z-index: 3;
+  height: max-content;
+}
+
+.actions ul{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+.actions ul li .actionLinks{
+  transition: var(--transition_one);
+  text-decoration: none;
+  color: var(--color_four);
+  margin: var(--padding_one);
+
+}
+.actions ul li .actionLinks:hover{
+  color: var(--color_three);
+}
+
+.homePage{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.homePage p{
+  margin: 30px;
+  word-break: keep-all;
+}
+.homePage img{
+  width: 97vw;
+  border-radius: var(--border_radius);
+}
+.homePage footer{
+  background-color: var(--color_four);
+  position: relative;
+  color: var(--color_four);
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
+  width: 100%;
+  border-radius: var(--border_radius);
+}
+.homePage footer div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  color: var(--color_one);
+}
+.homePage footer div a{
+  color: var(--color_three);
+  margin: var(--input_margins) 0;
+  text-decoration: none;
+  transition: var(--transition_one);
+}
+.homePage footer div:last-child a{
+  font-size: larger;
+}
+.homePage footer div a:hover{
+  letter-spacing: 0.1vw;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.renderDivs{
+  background-color: var(--color_one);
+}
+
+#renderMarket{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--color_one);
+}
+
+/* Market place divs*/
+#renderMarket .imageDiv{
+  position: relative;
+  border-radius: var(--border_radius);
+  width: 22vw;
+  min-width: 250px;
+  margin: 1vw;
+  height: max-content;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: 5px groove black;
+  padding: var(--padding_one);
+  transition:.3s ease all;
+  z-index: 2;
+  background-color: var(--color_one);
+  box-sizing: border-box;
+  box-shadow: 0 0 10px 4px var(--color_four);
+}
+#renderMarket .imageDiv:hover{
+  transform: scale(0.98);
+  box-shadow: none;
+}
+#renderMarket .imageDiv img{
+  position: relative;
+  width: 100%;
+  border-radius: var(--border_radius);
+  mix-blend-mode: darken;
+}
+#renderMarket .imageDiv .title{
+  text-align:center;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+  display: grid;
+  place-content: center;
+  font-weight: bolder;
+}
+#renderMarket .imageDiv .div1{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+#renderMarket .imageDiv .div1 .cartButton, #renderMarket .imageDiv .div1 .sellerButton{
+  position: relative;
+  padding: var(--padding_two);
+  font-size: 0.9rem;
+  border: none;
+  outline: none;
+  border-radius: var(--border_radius);
+  margin: var(--input_margins) 0;
+  transition: var(--transition_one);
+}
+#renderMarket .imageDiv .div1 .cartButton{
+  background-color: var(--color_three);
+  color: var(--color_one);
+}
+#renderMarket .imageDiv .div1 .cartButton:hover{
+  background-color: var(--color_one);
+  color: var(--color_three);
+  transform: var(--transform);
+}
+#renderMarket .imageDiv .div1 .sellerButton{
+  background-color: black;
+  color: var(--color_three);
+}
+#renderMarket .imageDiv .div1 .sellerButton:hover{
+  color: var(--color_eight);
+  transform: var(--transform);
+}
+#renderMarket .imageDiv .buyButton{
+  border: none;
+  outline: none;
+  padding: var(--padding_one);
+  width: 90%;
+  border-radius: var(--border_radius);
+  background-color: black;
+  color: var(--color_one);
+  transition: var(--transition_one);
+}
+#renderMarket .imageDiv .buyButton:hover{
+  transform: var(--transform);
+}
+
+#renderMarket .imageDiv .pricesDiv{
+  position: inherit;
+ width: 100%; 
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+#renderMarket .imageDiv .pricesDiv .oldPrice{
+  text-decoration: line-through;
+  color: var(--color_eight);
+}
+#renderMarket .imageDiv .pricesDiv .newPrice{
+  color: black;
+}
+
+#renderMarket .imageDiv .priceDiscount{
+  position: absolute;
+  float: right;
+  right: 0;
+  top: 0;
+  background-color: var(--color_eight);
+  height: 20px;
+  border-radius: 10px;
+  padding: 0 var(--padding_one);
+  width: max-content;
+  padding: none;
+  display: flex;
+  place-items: center;
+}
+#renderMarket .imageDiv .priceDiscount p{
+  position: relative;
+}
+.searchResult{
+  color: green;
+}
+
+.actionCannotComplete{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #1a1c22e2;
+  place-items: center;
+  z-index: 5;
+}
+.actionCannotComplete .innerActionCannotComplete{
+  background-color: var(--color_one);
+  padding: 50px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+.actionCannotComplete .innerActionCannotComplete p{
+  color: var(--color_four);
+}
+.actionCannotComplete .innerActionCannotComplete p a{
+  color: var(--color_three);
+}
+.actionCannotComplete .innerActionCannotComplete .cannotCompleteCancel{
+  width: 100%;
+  margin-bottom: var(--input_margins);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.actionCannotComplete .innerActionCannotComplete .cannotCompleteCancel button{
+  background-color: var(--color_six);
+  border: none;
+  outline: none;
+  padding: 3px;
+  border-radius: var(--border_radius);
+  font-size: large;
+  display: grid;
+  place-items: center;
+}
+.actionCannotComplete .innerActionCannotComplete .cannotCompleteCancel span{
+  color: var(--color_six);
+}
+
+.animateCannotComplete{
+  -webkit-animation: userio 3s;
+  animation: userio 3s;
+}
+
+@keyframes userio {
+  1%{
+      transform: translateX(-10px);
   }
-  to {
-    transform: rotate(360deg);
+  2%{
+      transform: translateX(10px);
+  }
+  3%{
+      transform: translateX(-10px);
+  }
+  4%{
+      transform: translateX(10px);
+  }
+  5%{
+      transform: translateX(0px);
+  }
+  96%{
+      transform: translateX(0px);
+  }
+  97%{
+      transform: translateX(10px);
+  }
+  98%{
+      transform: translateX(-10px);
+  }
+  99%{
+      transform: translateX(10px);
+  }
+  100%{
+      transform: translateX(-10px);
+  }
+
+}
+
+
+/* for mobile */
+@media screen and (max-width: 650px) {
+  .topNav{
+      display: none;
   }
 }
