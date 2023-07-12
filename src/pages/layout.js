@@ -167,6 +167,21 @@ const Layout = () => {
         }
     }
 
+    // side menu
+    const SideMenu = () => {
+        const sideMenu = document.getElementById("sideMenu");
+        if (sideMenu) {
+            sideMenu.style.left = "0px";
+        }
+    }
+
+    const SideMenuOff = () => {
+        const sideMenu = document.getElementById("sideMenu");
+        if (sideMenu) {
+            sideMenu.style.left = "";
+        }
+    }
+
     return(
         <>
             <div className="topNav" id="topNav" onClick={topNavClicked}>
@@ -216,7 +231,7 @@ const Layout = () => {
             </div>
 
             <div className="hasSearch" id="hasSearch">
-                <button title="Menu" className="menuBtn">
+                <button title="Menu" className="menuBtn" onClick={SideMenu}>
                     <MdMenu />
                 </button>
                 <input type="text" name="" id="searchInput" onInput={searchResults} placeholder="search item..." />
@@ -263,6 +278,21 @@ const Layout = () => {
             </div>
 
             <button type="button" className="goUp" id="goUp" title="Scroll up" onClick={ScrollUp}><FaArrowAltCircleUp /></button>
+
+            <div className="sideMenu" id="sideMenu">
+                <div className="sideMenuOff" onClick={SideMenuOff}>
+                    <span><MdCancel /></span>
+                </div>
+                <nav>
+                    <button type="button" className="homeNavLi">New Arrivals</button>
+                    <button type="button" className="homeNavLi">Furniture</button>
+                    <button type="button" className="homeNavLi">Art</button>
+                    <button type="button" className="homeNavLi">Lighting</button>
+                    <button type="button" className="homeNavLi">Decor</button>
+                    <button type="button" className="homeNavLi">Outoor</button>
+                    <button type="button" className="homeNavLi">Beads & Beauty</button>
+                </nav>
+            </div>
             
             <Outlet />
         </>

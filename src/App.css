@@ -2,6 +2,9 @@
 body{
   margin: 0;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
 }
 
 *{
@@ -36,10 +39,10 @@ button.goUp:hover{
 }
 
 :root{
-  --color_one: #e1ddd2;
+  --color_one: #ffefdd;
   --color_two: #3d3a50;
   --color_three: #0ebcf6;
-  --color_four: #555a54;
+  --color_four: #1b1b1b;
   --color_five: rgb(37, 110, 37);
   --color_six: rgb(215, 35, 35);
   --color_seven: rgb(0, 82, 0);
@@ -59,6 +62,7 @@ button.goUp:hover{
   --shadow3: 10px 15px 10px 0px rgb(202, 202, 202);
   --shadow4: 10px 10px 10px 0px rgb(187, 187, 187);
   --transform: scaleX(1.1);
+  --huge-padding: 25px;
 }
 
 ::-webkit-scrollbar{
@@ -234,12 +238,13 @@ button.goUp:hover{
   padding: 15px 5px;
   outline: none;
   border: none;
-  border-radius: var(--border_radius);
+  border-bottom: 1px solid var(--color_four);
+  /* border-radius: var(--border_radius); */
   background-color: var(--color_one);
   font-size: 15px;
   font-weight: 300;
   width: 75%;
-  box-shadow: var(--shadow3);
+  /* box-shadow: var(--shadow3); */
   color: var(--color_four);
   transition: var(--transition_one);
   -moz-user-select: none;
@@ -247,10 +252,9 @@ button.goUp:hover{
   user-select: none;
 }
 .signupModal form label input:hover, .signupModal form label select:hover{
-  /* transform: translateY(4px); */
-  box-shadow: var(--shadow4);
+  border-width: 3px;
 }
-.signupModal .eye{
+.signupModal .eye, .loginModal .eye{
   background-color: var(--color_one);
   color: var(--color_four);
   padding: 15px;
@@ -262,7 +266,7 @@ button.goUp:hover{
   box-shadow: var(--shadow3);
   transition: var(--transition_one);
 }
-.signupModal .eye:hover{
+.signupModal .eye:hover, .loginModal .eye:hover{
   box-shadow: none;
 }
 
@@ -350,24 +354,40 @@ button.goUp:hover{
   color: var(--color_four);
 }
 
-.loginModal form input{
+.loginModal form input#loginEmail{
   padding: var(--padding_one);
   position: relative;
   width: 100%;
   margin: var(--input_margins) auto;
   outline: none;
   border: none;
+  border-bottom: 1px solid var(--color_four);
   background-color: var(--color_one);
   color: var(--color_four);
-  box-shadow: var(--shadow3);
-  border-radius: var(--border_radius);
+  /* box-shadow: var(--shadow3); */
+  /* border-radius: var(--border_radius); */
   transition: var(--transition_one);
   font-size: 15px;
   font-weight: 300;
-
 }
-.loginModal form input:hover{
-  box-shadow: var(--shadow4);
+.loginModal form input#loginPassword{
+  padding: var(--padding_one);
+  position: relative;
+  margin: var(--input_margins) auto;
+  outline: none;
+  width: 75%;
+  border: none;
+  border-bottom: 1px solid var(--color_four);
+  background-color: var(--color_one);
+  color: var(--color_four);
+  /* box-shadow: var(--shadow3); */
+  /* border-radius: var(--border_radius); */
+  transition: var(--transition_one);
+  font-size: 15px;
+  font-weight: 300;
+}
+.loginModal form input#loginEmail:hover, .loginModal form input#loginPassword:hover{
+  border-width: 3px;
 }
 
 .loginModal form button[type="submit"]{
@@ -377,6 +397,9 @@ button.goUp:hover{
   outline: none;
   border-radius: var(--border_radius);
   width: 90%;
+}
+.loginModal form input#loginEmail:focus, .loginModal form input#loginPassword:focus, .signupModal input:focus{
+  border-color: var(--color_three);
 }
 .loginModal form button[type="submit"]:hover{
   background-color: rgb(46, 129, 46);
@@ -411,7 +434,7 @@ button.goUp:hover{
   background-color: var(--color_one);
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   position: -webkit-sticky;
   position: sticky;
@@ -420,18 +443,18 @@ button.goUp:hover{
   box-shadow: 0 0 20px 0 black;
   transition: var(--transition_one);
 }
-.hasSearch button{
+.hasSearch .menuBtn{
   background-color: var(--color_one);
-  padding: 0 var(--padding_two);
+  padding: 5px var(--padding_two);
   border-radius: var(--border_radius);
   color: var(--color_four);
   font-size: 25px;
+  display: flex;
   border: none;
-  display: none;
   align-items: center;
   justify-content: center;
 }
-.hasSearch button:hover{
+.hasSearch .menuBtn:hover{
   background-color: var(--color_three);
   color: var(--color_one);
   border: none;
@@ -448,6 +471,53 @@ button.goUp:hover{
   color: var(--color_four);
   font-style: italic;
   opacity: .35;
+}
+
+/* menu */
+.sideMenu{
+  position: fixed;
+  height: 100vh;
+  width: 20vw;
+  top: 0;
+  left: -100vw; /* hide the sidemenu by default*/
+  background-color: var(--color_four);
+  z-index: 4;
+  transition: var(--transition_one);
+}
+.sideMenu nav{
+  height: 100%;
+  background-color: var(--color_four);
+  display: flex;
+  flex-direction: column;
+}
+.sideMenu nav button{
+  display: flex;
+  position: relative;
+  padding: var(--huge-padding);
+  display: flex;
+  align-items: center;
+  background-color: var(--color_four);
+  border: none;
+  outline: none;
+  transition: 100ms;
+}
+.sideMenu nav button:hover{
+  background-color: var(--color_one);
+}
+.sideMenu .sideMenuOff{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  padding-bottom: 30px;
+}
+.sideMenu .sideMenuOff span{
+  padding: var(--padding_one);
+  font-size: 30px;
+}
+.sideMenu .sideMenuOff span:hover{
+  color: red;
 }
 
 
