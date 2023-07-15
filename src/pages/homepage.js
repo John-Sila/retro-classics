@@ -1,12 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 import { MdFacebook } from "react-icons/md";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import Slideshow from "../images/Slideshow";
 
 const Homepage = () => {
 
+    var [slideshowIndex, setSlideshowIndex] = useState(0);
+    const nextSlideshow = slideshowIndex < Slideshow.length - 1;
+
+    // Date for a certain sentence in homepage
     useEffect( () => {
         const date = new Date();
         const year = date.getFullYear();
@@ -14,17 +19,50 @@ const Homepage = () => {
         document.getElementById("businessYears").innerHTML = period;
     }, [])
 
+    // the slideshow at homepage
+    useEffect( () => {
+        const slideShowDiv = document.getElementById("slideshowdiv");
+        const Image = slideShowDiv.querySelector("#slideshowImage");
+        if (Image) {
+            // if there is something next after the image
+            Image.setAttribute("src", Slideshow[slideshowIndex].url);
+        }
+        
+    }, [slideshowIndex])
+    
+    // when the page loads, set the dots for slideshow
+    useEffect( () => {
+        for (let int = 0; int < Slideshow.length; int++) {
+            const dotsDiv = document.getElementById("slideshowDots");
+            const dot = document.createElement("div");
+            dot.classList.add('dots');
+            dotsDiv.appendChild(dot);
+        }
+    }, [])
+
+    setTimeout(() => {
+        if (nextSlideshow) {
+            setSlideshowIndex( () => slideshowIndex + 1)
+            return
+        }
+        setSlideshowIndex( () => slideshowIndex = 0 );
+    }, 3000);
+
     return (
         <div className="renderDivs homePage" id="renderDivsHome">
+            <div className="slideshowdiv" id="slideshowdiv">
+                <div className="leftOfSlideshow" id="leftOfSlideshow">
+                    <img src="" alt="" id="slideshowImage"/>
+                    <div id="slideshowDots" className="slideshowDots"></div>
+                </div>
+            </div>
+
             <p>
                 Welcome to <i>Retro Classics</i>, where we celebrate the beauty and history of timeless treasures.
             </p>
 
-            <p>
-                Our passion for antiques drives us to curate a remarkable collection that showcases the craftsmanship and stories of the past.
-            </p>
-
-            <img src="https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg" alt="Old Books" />
+            
+            <p>Our passion for antiques drives us to curate a remarkable collection that showcases the craftsmanship and stories of the past.</p>
 
             <p>
                 With over <span id="businessYears"></span> years of experience in the antique industry, we have developed a keen eye for extraordinary pieces.
@@ -34,17 +72,15 @@ const Homepage = () => {
             Our team of experts meticulously selects each item, ensuring that it meets our high standards of quality, authenticity, and historical significance.
             </p>
 
-            <img src="https://cdn.pixabay.com/photo/2015/04/07/14/27/camera-711025_1280.jpg" alt="Vintage Camera" />
 
             <p>
                 You can choose to buy from <a href="">our shop</a> or from our <a href="">C2C platform</a> where buyers meet sellers from all of East Africa.
             </p>
 
             <p>
-                Visit out <a href="/market">marketplace</a> for our general and official market.
+                Visit out <a href="/marketplace">marketplace</a> for our general and official market.
             </p>
 
-            <img src="https://cdn.pixabay.com/photo/2016/05/28/07/06/writer-1421099_1280.jpg" alt="Type writer" />
 
             <p>
                 Explore our captivating collection of antique furniture and houseware, where every piece tells a unique tale.
@@ -54,7 +90,6 @@ const Homepage = () => {
                 From the ornate carvings of a Victorian-era dining table to the elegant lines of an Art Deco armchair, our featured items exude charm and character.
             </p>
 
-            <img src="https://cdn.pixabay.com/photo/2014/09/23/20/19/castle-458058_1280.jpg" alt="Living room decor" />
 
             <p>
                 All types of antiques, retros and vintage products at your reach.
@@ -68,7 +103,6 @@ const Homepage = () => {
                 Our skilled craftsmen employ traditional techniques to preserve the integrity and beauty of each piece, ensuring it retains its value and allure.
             </p>
 
-            <img src="https://cdn.pixabay.com/photo/2017/02/14/16/46/room-2066402_1280.jpg" alt="Antique coach pattern" />
 
             <p>
                 We invite you to start your journey into the world of antiques by browsing our online collection.
@@ -82,7 +116,6 @@ const Homepage = () => {
                 <a href="">Join our newsletter</a> to stay updated on the latest additions and exclusive offers.
             </p>
 
-            <img src="https://cdn.pixabay.com/photo/2017/08/20/20/57/clock-2663148_1280.jpg" alt="Desk" />
 
             <p>
                 At Retro Classics, we are driven by our passion for antiques and the stories they hold.

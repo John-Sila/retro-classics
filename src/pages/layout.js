@@ -175,11 +175,17 @@ const Layout = () => {
         }
     }
 
+    // toggle side menu off
     const SideMenuOff = () => {
         const sideMenu = document.getElementById("sideMenu");
         if (sideMenu) {
             sideMenu.style.left = "";
         }
+    }
+
+    // when side menu links are clicked
+    const sideNavLinkClicked = () => {
+        console.log('clicked');
     }
 
     return(
@@ -284,13 +290,27 @@ const Layout = () => {
                     <span><MdCancel /></span>
                 </div>
                 <nav>
-                    <button type="button" className="homeNavLi">New Arrivals</button>
-                    <button type="button" className="homeNavLi">Furniture</button>
-                    <button type="button" className="homeNavLi">Art</button>
-                    <button type="button" className="homeNavLi">Lighting</button>
-                    <button type="button" className="homeNavLi">Decor</button>
-                    <button type="button" className="homeNavLi">Outoor</button>
-                    <button type="button" className="homeNavLi">Beads & Beauty</button>
+                    <button type="button" className="homeNavLi">
+                        <Link to="/" className="sideNavLinks" onClick={sideNavLinkClicked}>New Arrivals</Link>
+                    </button>
+                    <button type="button" className="homeNavLi">
+                        <Link to="" className="sideNavLinks" onClick={sideNavLinkClicked}>Furniture</Link>
+                    </button>
+                    <button type="button" className="homeNavLi">
+                        <Link to="" className="sideNavLinks" onClick={sideNavLinkClicked}>Art</Link>
+                    </button>
+                    <button type="button" className="homeNavLi">
+                        <Link to="" className="sideNavLinks" onClick={sideNavLinkClicked}>Lighting</Link>
+                    </button>
+                    <button type="button" className="homeNavLi">
+                        <Link to="" className="sideNavLinks" onClick={sideNavLinkClicked}>Decor</Link>
+                    </button>
+                    <button type="button" className="homeNavLi">
+                        <Link to="" className="sideNavLinks" onClick={sideNavLinkClicked}>Outoor</Link>
+                    </button>
+                    <button type="button" className="homeNavLi">
+                        <Link to="" className="sideNavLinks" onClick={sideNavLinkClicked}>Beads & Beauty</Link>
+                    </button>
                 </nav>
             </div>
             

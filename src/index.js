@@ -35,7 +35,6 @@ function DefaultComponent() {
     const thisTopNaveight = topNav.clientHeight;
     const hasSearchHeight = hasSearch.clientHeight;
     const ourPreferredTop = -(thisTopNaveight + hasSearchHeight) + "px";
-    const unNegatedTop = (thisTopNaveight + hasSearchHeight) + "px";
 
     if ( window.scrollY > CurrentScroll ) {
       //scrolled down
