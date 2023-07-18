@@ -8,28 +8,49 @@ import Slideshow from "../images/Slideshow";
 
 const Homepage = () => {
 
-    var [slideshowIndex, setSlideshowIndex] = useState(0);
-    const nextSlideshow = slideshowIndex < Slideshow.length - 1;
+    var [slideshowIndex, setSlideshowIndex] = useState(0); /**which image are we showing? */
+    const nextSlideshow = slideshowIndex < Slideshow.length - 1; /**is there a next? */
 
-    // Date for a certain sentence in homepage
-    useEffect( () => {
-        const date = new Date();
-        const year = date.getFullYear();
-        const period = parseFloat(year) - 2019;
-        document.getElementById("businessYears").innerHTML = period;
-    }, [])
+    // // Date for a certain sentence in homepage
+    // useEffect( () => {
+    //     const date = new Date();
+    //     const year = date.getFullYear();
+    //     const period = parseFloat(year) - 2019;
+    //     document.getElementById("businessYears").innerHTML = period;
+    // }, [])
 
+    
     // the slideshow at homepage
     useEffect( () => {
         const slideShowDiv = document.getElementById("slideshowdiv");
         const Image = slideShowDiv.querySelector("#slideshowImage");
+        Image.classList.add("slideImages");
         if (Image) {
-            // if there is something next after the image
+            // if there is something like an image in that div
             Image.setAttribute("src", Slideshow[slideshowIndex].url);
         }
-        
-    }, [slideshowIndex])
+
+        setTimeout(() => {
+            Image.style.opacity = "1";  
+        }, 250);
+        setTimeout(() => {
+            Image.style.opacity = "1";
+        }, 5000);
+        setTimeout(() => {
+            Image.style.opacity = "0";
+        }, 6000);
+
+        setTimeout(() => {
+            if (nextSlideshow) {
+                setSlideshowIndex(slideshowIndex + 1)
+                return
+            }
+            setSlideshowIndex(0);
+        }, 7000);
+
+    }, [slideshowIndex, nextSlideshow])
     
+
     // when the page loads, set the dots for slideshow
     useEffect( () => {
         for (let int = 0; int < Slideshow.length; int++) {
@@ -40,16 +61,40 @@ const Homepage = () => {
         }
     }, [])
 
-    setTimeout(() => {
-        if (nextSlideshow) {
-            setSlideshowIndex( () => slideshowIndex + 1)
-            return
+    // to relay an active style to the slide show dots
+    useEffect( () => {
+        const dotsDiv = document.getElementById("slideshowDots");
+        if (dotsDiv) {
+            const dots = document.getElementsByClassName("dots");
+            if (dots) {
+                for (let int = 0; int < dots.length; int++) {
+                    dots[int].classList.remove("activeSlide");
+                    dots[slideshowIndex].classList.add("activeSlide");
+                    dots[int].classList.remove("bordersActive");
+                    
+                    /**if there is a next image...also if there is an image at the back */
+                    if (nextSlideshow && slideshowIndex !== 0) {
+                        dots[slideshowIndex + 1].classList.add("bordersActive");
+                        dots[slideshowIndex - 1].classList.add("bordersActive");
+                    }
+                    // if this is the last slide
+                    if (!nextSlideshow) {
+                        dots[slideshowIndex - 1].classList.add("bordersActive");
+                    }
+                    // if this is the first slide
+                    if (slideshowIndex === 0) {
+                        dots[1].classList.add("bordersActive");
+                    }
+                }
+            }
         }
-        setSlideshowIndex( () => slideshowIndex = 0 );
-    }, 3000);
+    }, [slideshowIndex, nextSlideshow])
+    
 
     return (
         <div className="renderDivs homePage" id="renderDivsHome">
+
+            { /**begin with the slideshow */ }
             <div className="slideshowdiv" id="slideshowdiv">
                 <div className="leftOfSlideshow" id="leftOfSlideshow">
                     <img src="" alt="" id="slideshowImage"/>
@@ -57,73 +102,10 @@ const Homepage = () => {
                 </div>
             </div>
 
-            <p>
-                Welcome to <i>Retro Classics</i>, where we celebrate the beauty and history of timeless treasures.
-            </p>
-
-            
-            <p>Our passion for antiques drives us to curate a remarkable collection that showcases the craftsmanship and stories of the past.</p>
-
-            <p>
-                With over <span id="businessYears"></span> years of experience in the antique industry, we have developed a keen eye for extraordinary pieces.
-            </p>
-
-            <p>
-            Our team of experts meticulously selects each item, ensuring that it meets our high standards of quality, authenticity, and historical significance.
-            </p>
-
-
-            <p>
-                You can choose to buy from <a href="">our shop</a> or from our <a href="">C2C platform</a> where buyers meet sellers from all of East Africa.
-            </p>
-
-            <p>
-                Visit out <a href="/marketplace">marketplace</a> for our general and official market.
-            </p>
-
-
-            <p>
-                Explore our captivating collection of antique furniture and houseware, where every piece tells a unique tale.
-            </p>
-
-            <p>
-                From the ornate carvings of a Victorian-era dining table to the elegant lines of an Art Deco armchair, our featured items exude charm and character.
-            </p>
-
-
-            <p>
-                All types of antiques, retros and vintage products at your reach.
-            </p>
-
-            <p>
-                In addition to our curated collection, we offer expert restoration services to breathe new life into beloved antiques.
-            </p>
-
-            <p>
-                Our skilled craftsmen employ traditional techniques to preserve the integrity and beauty of each piece, ensuring it retains its value and allure.
-            </p>
-
-
-            <p>
-                We invite you to start your journey into the world of antiques by browsing our online collection.
-            </p>
-
-            <p>
-                Feel free to contact us for inquiries, consultations, or to schedule an appointment to visit our showroom.
-            </p>
-
-            <p>
-                <a href="">Join our newsletter</a> to stay updated on the latest additions and exclusive offers.
-            </p>
-
-
-            <p>
-                At Retro Classics, we are driven by our passion for antiques and the stories they hold.
-            </p>
-
-            <p>
-                We believe in preserving history and sharing the joy of owning unique pieces that carry the whispers of the past.
-            </p>
+            { /**then a hero image section */ }
+            <div className="heroImage" id="heroImage">
+                
+            </div>
 
             <footer>
                 <div id="footer1">

@@ -39,7 +39,7 @@ button.goUp:hover{
 }
 
 :root{
-  --color_one: #ffffff;
+  --color_one: rgb(67, 67, 67);
   --color_two: #3d3a50;
   --color_three: #0ebcf6;
   --color_four: #1b1b1b;
@@ -49,6 +49,7 @@ button.goUp:hover{
   --color_eight: darkorange;
   --color_nine: #f7f2ef;
   --color_ten: #bfbbaf;
+  --color_eleven: #045844;
   --gap_one_px: 25px;
   --transition_one: 150ms;
   --padding_one: 20px;
@@ -56,8 +57,7 @@ button.goUp:hover{
   --border_radius: 10px;
   --input_margins: 20px;
   --input_margins2: 7.5px;
-  --shadow: 0 0 12px 2px rgb(193, 193, 193);
-  --shadow2: 0 0 8px 2px rgb(206, 206, 206);
+  --shadow: 0 0 30px 0 rgb(27, 27, 27);
   --shadow2: 0 0 8px 2px rgb(206, 206, 206);
   --shadow3: 10px 15px 10px 0px rgb(202, 202, 202);
   --shadow4: 10px 10px 10px 0px rgb(187, 187, 187);
@@ -99,7 +99,7 @@ button.goUp:hover{
 }
 .topNav .links{
   text-decoration: none;
-  color: var(--color_four);
+  color: var(--color_nine);
   transition: var(--transition_one);
 }
 .topNav .links:hover{
@@ -165,7 +165,7 @@ button.goUp:hover{
 
 
 /* SIGN UP */
-.signupModal{
+/* .signupModal{
   position: fixed;
   width: 100%;
   height: 100%;
@@ -175,8 +175,8 @@ button.goUp:hover{
   place-items: center;
   background-color: var(--color_one);
   z-index: 5;
-}
-.signupModal .signupFormPC{
+} */
+/* .signupModal .signupFormPC{
   display: flex;
   flex-direction: row;
   width: 80vw;
@@ -186,6 +186,7 @@ button.goUp:hover{
   border-radius: var(--border_radius);
   box-sizing: border-box;
   justify-content: center;
+  transition: var(--transition_one);
 }
 .signupModal .signupFormMobile{
   display: flex;
@@ -199,7 +200,8 @@ button.goUp:hover{
   justify-content: center;
 }
 .signupModal form:hover{
-  box-shadow: var(--shadow2);
+  transform: scale(0.995);
+  box-shadow: none;
 }
 
 .signupModal form .signupLeft, .signupModal form .signupRight{
@@ -217,25 +219,26 @@ button.goUp:hover{
 .signupModal form label{
   margin: var(--input_margins) 0;
   color: var(--color_four);
+  font-weight: bolder;
 }
 .signupModal form label input, .signupModal form label select{
   margin: 10px 0;
   padding: 15px 5px;
   outline: none;
   border: none;
-  border-bottom: 1px solid var(--color_four);
+  border-bottom: 1px solid var(--color_four); */
   /* border-radius: var(--border_radius); */
-  background-color: var(--color_one);
+  /* background-color: var(--color_one);
   font-size: 15px;
-  font-weight: 300;
-  width: 75%;
+  font-weight: 300; */
+  /* width: 75%; */
   /* box-shadow: var(--shadow3); */
-  color: var(--color_four);
+  /* color: var(--color_nine);
   transition: var(--transition_one);
   -moz-user-select: none;
   -webkit-user-select: none;
-  user-select: none;
-}
+  user-select: none; */
+/* }
 .signupModal form label input:hover, .signupModal form label select:hover{
   border-width: 3px;
 }
@@ -248,10 +251,11 @@ button.goUp:hover{
   border-radius: var(--border_radius);
   border: none;
   outline: none;
-  box-shadow: var(--shadow3);
+  box-shadow: var(--shadow);
   transition: var(--transition_one);
 }
 .signupModal .eye:hover, .loginModal .eye:hover{
+  transform: scale(0.9);
   box-shadow: none;
 }
 
@@ -286,132 +290,301 @@ button.goUp:hover{
 }
 .signupModal .signupRight .goToLogin{
   color: var(--color_three);
+} */
+
+.signupModal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color_four);
+  display: grid;
+  place-content: center;
+  z-index: 4;
+}
+.signup {
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  font-weight: bold;
+  font-size: x-large;
+  margin-top: 1.5em;;
+}
+
+.signupModal form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350px;
+  width: 650px;
+  flex-direction: column;
+  gap: 35px;
+  border-radius: 15px;
+  background: #e3e3e3;
+  box-shadow: 16px 16px 32px #484848,
+        -16px -16px 32px #303030;
+  border-radius: 8px;
+  padding: 0 20px;
+}
+
+.signupModal form .mainForm{
+  height: auto!important ;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+}
+
+.signupModal form .mainForm .left{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 50%;
+}
+.signupModal form .mainForm .right{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 50%;
+}
+
+.signupModal form .inputBox,
+.signupModal form .inputBox1 {
+  position: relative;
+  width: 250px;
+}
+
+.signupModal form .inputBox input,
+.signupModal form .inputBox1 input {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: none;
+  color: #000;
+  font-size: 1em;
+  background: transparent;
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #000;
+  transition: 0.1s;
+  border-bottom-left-radius: 8px;
+  margin: 30px 0;
+}
+
+.signupModal form .inputBox span,
+.signupModal form .inputBox1 span {
+  margin-top: 5px;
+  position: absolute;
+  left: 0;
+  transform: translateY(22.5px);
+  margin-left: 10px;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 12px;
+  color: #000;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 3px;
+  border-radius: 8px;
+}
+
+.signupModal form .inputBox input:valid~span,
+.signupModal form .inputBox input:focus~span {
+  transform: translateX(113px) translateY(12.5px);
+  font-size: 0.8em;
+  padding: 5px 10px;
+  background: #000;
+  letter-spacing: 0.2em;
+  color: #fff;
+  border: 2px;
+}
+
+.signupModal form .inputBox1 input:valid~span,
+.signupModal form .inputBox1 input:focus~span {
+  transform: translateX(156px) translateY(12.5px);
+  font-size: 0.8em;
+  padding: 5px 10px;
+  background: #000;
+  letter-spacing: 0.2em;
+  color: #fff;
+  border: 2px;
+}
+
+.signupModal form .inputBox input:valid,
+.signupModal form .inputBox input:focus,
+.signupModal form .inputBox1 input:valid,
+.signupModal form .inputBox1 input:focus {
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.signupModal form button[type="submit"] {
+  height: 45px;
+  width: max-content;
+  border-radius: 5px;
+  border: 2px solid #000;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.5s;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 3em;
+}
+
+.signupModal form button[type="submit"]:hover {
+  background-color: var(--color_four);
+  color: white;
 }
 
 
 
 /* LOGIN */
-.loginModal{
+.mainLog{
   position: fixed;
-  width: 100%;
-  height: 100%;
+  background-color: var(--color_four);
   display: grid;
-  place-items: center;
+  place-content: center;
   top: 0;
   left: 0;
-  background-color: var(--color_one);
-  z-index: 5;
+  height: 100vh;
+  width: 100vw;
+  z-index: 4;
 }
-
-.loginModal .loginFormPC{
+.mainLog .loginModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(24, 20, 20, 0.987);
+  background-color: var(--color_four);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+}
+.mainLog .loginModal > span {
   position: relative;
-  width: 500px;
-  box-shadow: var(--shadow);
-  border-radius: var(--border_radius);
+  width: 100%;
+  background-color: inherit;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  color: var(--color_four);
-  box-sizing: border-box;
-  transition: var(--transition_one);
 }
-.loginModal .loginFormMobile{
+.mainLog .loginModal > form > span{
   position: relative;
   width: 100%;
-  box-shadow: var(--shadow);
-  border-radius: var(--border_radius);
+  background-color: inherit;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  color: var(--color_four);
-  box-sizing: border-box;
-  transition: var(--transition_one);
+  margin-top: var(--input_margins);
 }
-
-.loginModal form:hover{
-  box-shadow: var(--shadow2);
+.mainLog .loginModal > form > span > a{
+  color: var(--color_three);
+  text-decoration: none;
 }
-
-.loginModal form label{
-  margin: var(--input_margins2) 0;
-  width: 100%;
-  padding: var(--padding_one);
-  color: var(--color_four);
-}
-
-.loginModal form input#loginEmail{
-  padding: var(--padding_one);
-  position: relative;
-  width: 100%;
-  margin: var(--input_margins) auto;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid var(--color_four);
-  background-color: var(--color_one);
-  color: var(--color_four);
-  /* box-shadow: var(--shadow3); */
-  /* border-radius: var(--border_radius); */
-  transition: var(--transition_one);
-  font-size: 15px;
-  font-weight: 300;
-}
-.loginModal form input#loginPassword{
-  padding: var(--padding_one);
-  position: relative;
-  margin: var(--input_margins) auto;
-  outline: none;
-  width: 75%;
-  border: none;
-  border-bottom: 1px solid var(--color_four);
-  background-color: var(--color_one);
-  color: var(--color_four);
-  /* box-shadow: var(--shadow3); */
-  /* border-radius: var(--border_radius); */
-  transition: var(--transition_one);
-  font-size: 15px;
-  font-weight: 300;
-}
-.loginModal form input#loginEmail:hover, .loginModal form input#loginPassword:hover{
-  border-width: 3px;
-}
-
-.loginModal form button[type="submit"]{
-  background-color: var(--color_five);
-  padding: var(--padding_one);
-  border: none;
-  outline: none;
-  border-radius: var(--border_radius);
-  width: 90%;
-}
-.loginModal form input#loginEmail:focus, .loginModal form input#loginPassword:focus, .signupModal input:focus{
-  border-color: var(--color_three);
-}
-.loginModal form button[type="submit"]:hover{
-  background-color: rgb(46, 129, 46);
-}
-.loginModal form .goToSignup{
+.mainLog .loginModal > form > span > a:hover{
   color: var(--color_three);
   text-decoration: underline;
+  color: var(--color_eight);
 }
 
-.loginModal form .finishLogin{
+.loginModal .loginFormPC {
   position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: end;
 }
-.loginModal form .finishLogin button{
-  background-color: var(--color_six);
-  padding: var(--padding_one);
+
+.loginModal .loginFormPC input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+
+.loginModal .loginFormPC label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  color: var(--color_nine);
+  pointer-events: none;
+  transition: .5s;
+  font-size: 16px;
+  opacity: .4;
+}
+
+.loginModal .loginFormPC input:focus ~ label {
+  top: -20px;
+  left: 0;
+  color: #bdb8b8;
+  font-size: 12px;
+  opacity: 1;
+}
+
+.loginModal form button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--color_nine);
   border: none;
   outline: none;
-  border-radius: var(--border_radius);
-  margin: var(--input_margins);
+  background-color: var(--color_four);
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  letter-spacing: 4px;
 }
-.loginModal form .finishLogin button:hover{
-  background-color: rgb(235, 38, 38);
+
+.loginModal button:hover {
+  background: #03f40f;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #03f40f,
+              0 0 25px #03f40f,
+              0 0 50px #03f40f,
+              0 0 100px #03f40f;
 }
+
+.loginModal button span {
+  position: absolute;
+  display: block;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.loginModal button span:nth-child(1) {
+  bottom: 2px;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03f40f);
+  animation: btn-anim1 2s linear infinite;
+}
+
+
+
+
 
 .hasSearch{
   width: 100vw;
@@ -429,21 +602,74 @@ button.goUp:hover{
   transition: var(--transition_one);
 }
 .hasSearch .menuBtn{
-  background-color: var(--color_one);
-  padding: 5px var(--padding_two);
-  border-radius: var(--border_radius);
-  color: var(--color_four);
-  font-size: 25px;
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  transition: all 0.5s ease-in-out;
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
   display: flex;
-  border: none;
   align-items: center;
-  justify-content: center;
+  background: #040f16;
+  color: #f5f5f5;
 }
-.hasSearch .menuBtn:hover{
-  background-color: var(--color_three);
-  color: var(--color_one);
+.hasSearch .menuBtn {
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
   border: none;
+  transition: all 0.5s ease-in-out;
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  background: var(--color_four);
+  color: #f5f5f5;
+  outline: 1px solid var(--color_four);
 }
+
+.hasSearch .menuBtn:hover {
+  box-shadow: 0 0 20px 0px #2e2e2e3a;
+}
+
+.hasSearch .menuBtn .icon {
+  position: absolute;
+  height: 40px;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.hasSearch .menuBtn .text {
+  transform: translateX(55px);
+}
+
+.hasSearch .menuBtn:hover .icon {
+  width: 175px;
+}
+
+.hasSearch .menuBtn:hover .text {
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.hasSearch .menuBtn:focus {
+  outline: none;
+}
+
+.hasSearch .menuBtn:active .icon {
+  transform: scale(0.85);
+}
+
+
+
+
+
 
 .hasSearch input{
   padding: var(--padding_two);
@@ -545,10 +771,14 @@ button.goUp:hover{
   text-decoration: none;
   color: var(--color_four);
   margin: var(--padding_one);
-
+  
 }
 .actions ul li .actionLinks:hover{
   color: var(--color_three);
+}
+
+.renderDivs{
+  background-color: var(--color_one);
 }
 
 .homePage{
@@ -575,7 +805,15 @@ button.goUp:hover{
 .homePage .slideshowdiv .leftOfSlideshow img{
   position: relative;
   height: 180px;
+  cursor: pointer;
+  border-radius: var(--border_radius);
 }
+/* Create the animation for slideshow images */
+.homePage .slideshowdiv .leftOfSlideshow .slideImages{
+  opacity: 0; /**begin at nothing then JavaScript will do the work. */
+  transition: all 1s ease-in-out;
+}
+
 .homePage .slideshowdiv .leftOfSlideshow .slideshowDots{
   display: flex;
   flex-direction: row;
@@ -587,13 +825,29 @@ button.goUp:hover{
 }
 .homePage .slideshowdiv .leftOfSlideshow .slideshowDots .dots{
   position: inherit;
-  height: 10px;
-  width: 10px;
+  height: 5px;
+  width: 5px;
   background-color: rgb(200, 200, 200);
   border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition_one);
 }
 .homePage .slideshowdiv .leftOfSlideshow .slideshowDots .activeSlide{
-  background-color: red;
+  width: 15px;
+  height: 15px;
+}
+.homePage .slideshowdiv .leftOfSlideshow .slideshowDots .bordersActive{
+  width: 9px;
+  height: 9px;
+}
+.homePage .heroImage{
+  position: relative;
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/04/23/23/luggage-1799224_1280.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+  height: 100vh;
+  border-radius: var(--border_radius);
 }
 
 .homePage p{
@@ -630,9 +884,6 @@ button.goUp:hover{
   letter-spacing: 0.1vw;
 }
 
-.renderDivs{
-  background-color: var(--color_one);
-}
 
 #renderMarket{
   display: flex;

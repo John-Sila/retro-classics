@@ -138,7 +138,7 @@ const Signup = () => {
 
     return(
         <>
-            <div className="signupModal" id="signupModal">
+            {/* <div className="signupModal" id="signupModal">
                 <form onSubmit={ValidateData} action="http://localhost:8080/signup/submission" method="post" id="signupForm" className="signupFormPC">
                     <div className="signupLeft">
                         <label>
@@ -193,7 +193,56 @@ const Signup = () => {
                         <Link to="/login" className="goToLogin">Login.</Link>
                     </div>
                 </form>
-            </div>
+            </div> */}
+
+
+        <div class="signupModal">
+            <form class="card">
+                <a class="signup">Sign Up</a>
+
+                <div className="mainForm">
+                    <div className="left">
+                        <div class="inputBox1">
+                            <input type="text" required="required" />
+                            <span class="user">Email</span>
+                        </div>
+
+                        <div class="inputBox">
+                            <input type="text" required="required" />
+                            <span>Username</span>
+                        </div>
+
+                        <div class="inputBox">
+                            <input type="password" required="required" />
+                            <span>Password</span>
+                        </div>
+
+                        <div class="inputBox">
+                            <input type="password" required="required" />
+                            <span>Confirm Password</span>
+                        </div>
+
+                    </div>
+
+                    <div className="right">
+                        <div class="inputBox1">
+                            <input type="text" required="required" />
+                            <span class="user">Country</span>
+                        </div>
+                        <div class="inputBox1">
+                            <input type="text" required="required" />
+                            <span class="user">Mobile number</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="submit" class="submit">create account</button>
+
+            </form>
+        </div>
+
+
         </>
     )
 }

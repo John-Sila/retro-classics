@@ -121,7 +121,7 @@ const Layout = () => {
     const windowClicked = event => {
         const li = event.target.parentElement;
         const ul = li.parentElement;
-        const div = ul.parentElement
+        const div = ul.parentElement;
 
         if ( div.id === "actionsDiv" ) {
             setMouseActions( mouseActions => false );
@@ -237,9 +237,16 @@ const Layout = () => {
             </div>
 
             <div className="hasSearch" id="hasSearch">
-                <button title="Menu" className="menuBtn" onClick={SideMenu}>
-                    <MdMenu />
-                </button>
+            <button class="menuBtn" onClick={SideMenu}>
+                <span class="icon">
+                    <svg viewBox="0 0 175 80" width="40" height="40">
+                        <rect width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+                        <rect y="30" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+                        <rect y="60" width="80" height="15" fill="#f0f0f0" rx="10"></rect>
+                    </svg>
+                </span>
+                <span class="text">MENU</span>
+            </button>
                 <input type="text" name="" id="searchInput" onInput={searchResults} placeholder="search item..." />
             </div>
 
