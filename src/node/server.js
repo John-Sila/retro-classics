@@ -21,11 +21,11 @@ beta.use(bodyParser.urlencoded( { extended : true } )); // get the data from tha
 beta.use(bodyParser.json()); // make it json() so we can do a dot-formation access.
 
 beta.post("/signup/submission", ( req, res ) => {
-    const { name, username, password, country, email, mobilenumber } = req.body;
+    const { Email, Username, Password, Country, Mobilenumber } = req.body;
     const BasketQuantity = 0;
     const BasketItems = "";
-    const sqlQuery = "INSERT INTO retroclassics (CustomerName, UserName, Password, Country, Email, MobileNumber, BasketQuantity, BasketItems) VALUES?";
-    const Values = [ [name, username, password, country, email, mobilenumber, BasketQuantity, BasketItems] ];
+    const sqlQuery = "INSERT INTO retroclassics (Email, FullName, Password, Country, MobileNumber, BasketQuantity, BasketItems) VALUES?";
+    const Values = [ [Email, Username, Password, Country, Mobilenumber, BasketQuantity, BasketItems] ];
     alpha.query(sqlQuery, [Values], ( err, result ) => {
         if( err ) throw err.sqlMessage;
         console.log("Data has been successfully saved to database 'Polygon' into table 'retroclassics'.");

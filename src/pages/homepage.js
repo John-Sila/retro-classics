@@ -11,15 +11,6 @@ const Homepage = () => {
     var [slideshowIndex, setSlideshowIndex] = useState(0); /**which image are we showing? */
     const nextSlideshow = slideshowIndex < Slideshow.length - 1; /**is there a next? */
 
-    // // Date for a certain sentence in homepage
-    // useEffect( () => {
-    //     const date = new Date();
-    //     const year = date.getFullYear();
-    //     const period = parseFloat(year) - 2019;
-    //     document.getElementById("businessYears").innerHTML = period;
-    // }, [])
-
-    
     // the slideshow at homepage
     useEffect( () => {
         const slideShowDiv = document.getElementById("slideshowdiv");

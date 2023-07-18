@@ -165,132 +165,6 @@ button.goUp:hover{
 
 
 /* SIGN UP */
-/* .signupModal{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  display: grid;
-  place-items: center;
-  background-color: var(--color_one);
-  z-index: 5;
-} */
-/* .signupModal .signupFormPC{
-  display: flex;
-  flex-direction: row;
-  width: 80vw;
-  height: 85vh;
-  background-color: var(--color_one);
-  box-shadow: var(--shadow);
-  border-radius: var(--border_radius);
-  box-sizing: border-box;
-  justify-content: center;
-  transition: var(--transition_one);
-}
-.signupModal .signupFormMobile{
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: max-content;
-  background-color: var(--color_one);
-  box-shadow: var(--shadow);
-  border-radius: var(--border_radius);
-  box-sizing: border-box;
-  justify-content: center;
-}
-.signupModal form:hover{
-  transform: scale(0.995);
-  box-shadow: none;
-}
-
-.signupModal form .signupLeft, .signupModal form .signupRight{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--padding_two);
-  overflow-y: auto;
-  overflow-x: hidden;
-  box-sizing: border-box;
-  position: relative;
-  width: 50%;
-}
-
-.signupModal form label{
-  margin: var(--input_margins) 0;
-  color: var(--color_four);
-  font-weight: bolder;
-}
-.signupModal form label input, .signupModal form label select{
-  margin: 10px 0;
-  padding: 15px 5px;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid var(--color_four); */
-  /* border-radius: var(--border_radius); */
-  /* background-color: var(--color_one);
-  font-size: 15px;
-  font-weight: 300; */
-  /* width: 75%; */
-  /* box-shadow: var(--shadow3); */
-  /* color: var(--color_nine);
-  transition: var(--transition_one);
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none; */
-/* }
-.signupModal form label input:hover, .signupModal form label select:hover{
-  border-width: 3px;
-}
-.signupModal .eye, .loginModal .eye{
-  background-color: var(--color_one);
-  color: var(--color_four);
-  padding: 15px;
-  margin: var(--input_margins);
-  font-size: 15px;
-  border-radius: var(--border_radius);
-  border: none;
-  outline: none;
-  box-shadow: var(--shadow);
-  transition: var(--transition_one);
-}
-.signupModal .eye:hover, .loginModal .eye:hover{
-  transform: scale(0.9);
-  box-shadow: none;
-}
-
-.signupModal .signupRight .hasSignupButtons{
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.signupModal .signupRight .hasSignupButtons button[type="submit"]{
-  background-color: var(--color_five);
-  padding: var(--padding_one);
-  border: none;
-  outline: none;
-  border-radius: var(--border_radius);
-}
-.signupModal .signupRight .hasSignupButtons button[type="submit"]:hover{
-  background-color: rgb(46, 129, 46);
-}
-.signupModal .signupRight .hasSignupButtons button[type="button"]{
-  background-color: var(--color_six);
-  padding: var(--padding_one);
-  border: none;
-  outline: none;
-  border-radius: var(--border_radius);
-}
-.signupModal .signupRight .hasSignupButtons button[type="button"]:hover{
-  background-color: rgb(235, 38, 38);
-}
-.signupModal .signupRight p{
-  color: var(--color_four);
-}
-.signupModal .signupRight .goToLogin{
-  color: var(--color_three);
-} */
 
 .signupModal{
   position: fixed;
@@ -323,8 +197,7 @@ button.goUp:hover{
   gap: 35px;
   border-radius: 15px;
   background: #e3e3e3;
-  box-shadow: 16px 16px 32px #484848,
-        -16px -16px 32px #303030;
+  box-shadow: 16px 16px 32px #484848, -16px -16px 32px #303030;
   border-radius: 8px;
   padding: 0 20px;
 }
@@ -436,6 +309,33 @@ button.goUp:hover{
 .signupModal form button[type="submit"]:hover {
   background-color: var(--color_four);
   color: white;
+}
+.signupModal .countries{
+  position: fixed;
+  width: max-content;
+  height: 99px;
+  display: none;
+  flex-direction: column;
+  float: left;
+  top: 50px;
+  left: 0;
+  background-color: red;
+  overflow: scroll;
+  z-index: 5;
+}
+.signupModal .countries button{
+  position: relative;
+  height: calc(100% / 2);
+  border: none;
+  background-color: #e3e3e3;
+  color: var(--color_four);
+  outline: none;
+  padding: var(--padding_one);
+  margin: var(--input_margins2);
+  box-shadow: 0 0 20px 1px black;
+  display: grid;
+  place-content: center;
+  border-radius: var(--border_radius);
 }
 
 

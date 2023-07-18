@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react";
-import { MdRemoveRedEye } from "react-icons/md";
-import { Link } from "react-router-dom";
+// import { MdRemoveRedEye } from "react-icons/md";
+// import { Link } from "react-router-dom";
 import "../App.css";
+import namedCountries from "../scripts/countries";
 
 const Signup = () => {
-    // check git merge
-
     const [formIsValid, setFormIsValid] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+    const [countries, setCountries] = useState(false);
 
     useEffect( () => {
         window.addEventListener( "click", windowClicked );
     }, [])
 
+    // if you click the modal, then you are taken to the homepage
     const windowClicked = event => {
         if ( event.target.id.toLowerCase() === "signupmodal" ) {
             window.location.pathname = "/";
         }
     }
 
-    if(formIsValid){
-        document.getElementsByTagName("form")[0].submit();
-    }
-
-    const passwordText = () => {
-        setShowPassword(!showPassword);
-    }
+    // determined by a useEffect
+    useEffect( () => {
+        if(formIsValid){
+            document.getElementsByTagName("form")[0].submit();
+        }
+    }, [formIsValid])
 
     const ValidateData = event => {
         if ( formIsValid ) {
@@ -35,54 +34,7 @@ const Signup = () => {
         // form validation is not true.
         event.preventDefault();
         
-        // name
-        var name = document.getElementById("name").value;
-        let spaces = [];
-        
-        for (let i = 0; i < name.length; i++) {
-            const element = name[i];
-            if ( element === " " ) {
-                spaces += element;
-            }
-        }
-
-        if (spaces.length !== 1 ) {
-            alert("Name must be 2 names.");
-            return;
-        }
-
-        // username
-        const username = document.getElementById("username").value;
-        username.trim();
-        if (username === "") {
-            alert("Username cannot be empty.")
-            return;
-        }
-        if (username.length < 6) {
-            alert("At least 6 characters are need for username.")
-            return;
-        }
-
-        // password
-        const confirmpassword = document.getElementById("confirmpassword").value;
-        const password = document.getElementById("password").value;
-        if ( password.length < 7 ) {
-            alert("Password must be at least 7 characters long.");
-            return;
-        }
-        if (confirmpassword !== password) {
-            alert("Password confirmation was wrong.")
-            return;
-        }
-
-        // country
-        const selectCountry = document.getElementById("selectCountry").value;
-        if (selectCountry === "null") {
-            alert("Choose country.")
-            return;
-        }
-
-        // email
+        // email format
         const email = document.getElementById("email").value;
         const indexOfAt = email.lastIndexOf("@");
         if ((email.length - indexOfAt) < 5) {
@@ -100,9 +52,42 @@ const Signup = () => {
             alert("Your email appears to be wrong. There must be a dot somewhere after '@'.")
             return;
         }
+        
+        // name ==> check if there are only 2 names
+        var name = document.getElementById("FullName").value;
+        let spaces = [];
+        for (let i = 0; i < name.length; i++) {
+            const element = name[i];
+            if ( element === " " ) {
+                spaces += element;
+            }
+        }
+        if (spaces.length !== 1 ) {
+            alert("Your Full Name must be 2 names.");
+            return;
+        }
+
+        // password match
+        const confirmpassword = document.getElementById("ConfirmPassword").value;
+        const password = document.getElementById("Password").value;
+        if ( password.length < 7 ) {
+            alert("Password must be at least 7 characters long.");
+            return;
+        }
+        if (confirmpassword !== password) {
+            alert("Password confirmation was wrong.")
+            return;
+        }
+
+        // country
+        const Country = document.getElementById("Country").value.toString();
+        if (Country === "") {
+            alert("Select Country.")
+            return;
+        }
 
         // mobile number
-        let mobileNumber = document.getElementById("mobileNumber").value;
+        let mobileNumber = document.getElementById("MobileNumber").value;
         if(mobileNumber.length !== 10) {
             alert("Check mobile number length.");
             return;
@@ -120,105 +105,50 @@ const Signup = () => {
 
     }
 
-    const checkEmailAvailability = event => {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/email/availability");
-        xhr.onreadystatechange = () => {
-            if ( xhr.readystate === 4 && xhr.status === 200 ) {
-                if ( xhr.responseText.toLocaleLowerCase() === "present" ) {
-                    alert("E-Mail exists.")
-                    return;
+    useEffect( () => {
+        const signupModal = document.getElementById("signupModal");
+        const countriesDiv = document.getElementById("countriesDiv");
+        if (countries) {
+            countriesDiv.style.display = "flex";
+            if (signupModal && countriesDiv) {
+                for (let int = 0; int < namedCountries.length; int++) {
+                    const button = document.createElement("button")
+                    button.setAttribute("type", "button");
+                    button.innerHTML = namedCountries[int].name;
                 }
             }
+        } else{
+            countriesDiv.style.display = "";
         }
-        const emailInput = JSON.stringify(event.target.value)
-        xhr.send(emailInput)
 
-    }
+
+    }, [countries])
 
     return(
         <>
-            {/* <div className="signupModal" id="signupModal">
-                <form onSubmit={ValidateData} action="http://localhost:8080/signup/submission" method="post" id="signupForm" className="signupFormPC">
-                    <div className="signupLeft">
-                        <label>
-                            Name:<br />
-                            <input type="text" name="name" id="name" required/>
-                        </label>
-                        <label>
-                            E-Mail:<br />
-                            <input type="email" name="email" id="email" onBlur={checkEmailAvailability} required/>
-                        </label>
-                        <label>
-                            Password:<br />
-                            <input type={showPassword ? "text" : "password"} name="password" id="password" required />
-                            <button onClick={passwordText} className="eye"><MdRemoveRedEye/></button>
-                        </label>
-                        <label>
-                            Confirm Password:<br />
-                            <input type="password" name="" id="confirmpassword" required />
-                        </label>
-                    </div>
-                    <div className="signupRight">
-                        <label>
-                            Country:<br />
-                            <select name="country" id="selectCountry">
-                                <option value="null">Choose country</option>
-                                <option value="Kenya">Kenya</option>
-                                <option value="Uganda">Uganda</option>
-                                <option value="Tanzania">Tanzania</option>
-                                <option value="Rwanda">Rwanda</option>
-                                <option value="Burundi">Burundi</option>
-                                <option value="Mozambique">Mozambique</option>
-                                <option value="South Africa">South Africa</option>
-                                <option value="Nigeria">Nigeria</option>
-                                <option value="Ethiopia">Ethiopia</option>
-                                <option value="Sudan">Sudan</option>
-                            </select>
-                        </label>
-                        <label>
-                            Preferred Username:<br />
-                            <input type="text" name="username" id="username" required />
-                        </label>
-                        <label>
-                            Mobile Phone:<br />
-                            <input type="text" name="mobilenumber" id="mobileNumber" required/>
-                        </label>
-
-                        <div className="hasSignupButtons">
-                            <button type="submit">Create Account</button>
-                            <button type="button" className="cancelSignup" onClick={ () => { window.location = "/" } }>Cancel</button>
-                        </div>
-                        <p>Already have an account?</p>
-                        <Link to="/login" className="goToLogin">Login.</Link>
-                    </div>
-                </form>
-            </div> */}
-
-
-        <div class="signupModal">
-            <form class="card">
-                <a class="signup">Sign Up</a>
+        <div class="signupModal" id="signupModal">
+            <form class="card" action="http://localhost/signup/submission/" onSubmit={ValidateData}>
+                <p class="signup">Sign Up</p>
 
                 <div className="mainForm">
                     <div className="left">
                         <div class="inputBox1">
                             <input type="text" required="required" />
-                            <span class="user">Email</span>
+                            <span class="user" name="Email" id="Email" >Email</span>
                         </div>
 
                         <div class="inputBox">
-                            <input type="text" required="required" />
-                            <span>Username</span>
+                            <input type="text" name="FullName" id="FullName" required="required" />
+                            <span>Full name</span>
                         </div>
 
                         <div class="inputBox">
-                            <input type="password" required="required" />
+                            <input type="password" name="Password" id="Password" required="required" />
                             <span>Password</span>
                         </div>
 
                         <div class="inputBox">
-                            <input type="password" required="required" />
+                            <input type="password" name="ConfirmPassword" id="ConfirmPassword" required="required" />
                             <span>Confirm Password</span>
                         </div>
 
@@ -226,11 +156,11 @@ const Signup = () => {
 
                     <div className="right">
                         <div class="inputBox1">
-                            <input type="text" required="required" />
+                            <input type="text" name="Country" id="Country" onFocus={() => setCountries(true)} required="required" />
                             <span class="user">Country</span>
                         </div>
                         <div class="inputBox1">
-                            <input type="text" required="required" />
+                            <input type="text" name="MobileNumber" id="MobileNumber" required="required" />
                             <span class="user">Mobile number</span>
                         </div>
 
@@ -240,6 +170,9 @@ const Signup = () => {
                 <button type="submit" class="submit">create account</button>
 
             </form>
+
+            <div className="countriesDiv" id="countriesDiv"></div>
+
         </div>
 
 
