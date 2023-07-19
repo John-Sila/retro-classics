@@ -39,11 +39,11 @@ button.goUp:hover{
 }
 
 :root{
-  --color_one: rgb(67, 67, 67);
+  --color_one: rgb(45, 45, 45);
   --color_two: #3d3a50;
   --color_three: #0ebcf6;
   --color_four: #1b1b1b;
-  --color_five: rgb(37, 110, 37);
+  --color_five: rgb(82, 82, 82);
   --color_six: rgb(215, 35, 35);
   --color_seven: rgb(0, 82, 0);
   --color_eight: darkorange;
@@ -196,10 +196,13 @@ button.goUp:hover{
   flex-direction: column;
   gap: 35px;
   border-radius: 15px;
-  background: #e3e3e3;
-  box-shadow: 16px 16px 32px #484848, -16px -16px 32px #303030;
+  background: var(--color_four);
+  /* box-shadow: 16px 16px 32px #484848, -16px -16px 32px #303030; */
   border-radius: 8px;
-  padding: 0 20px;
+  padding: 20px;
+  margin: var(--input_margins);
+  overflow-y: auto;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
 
 .signupModal form .mainForm{
@@ -235,13 +238,13 @@ button.goUp:hover{
   padding: 10px;
   outline: none;
   border: none;
-  color: #000;
+  color: var(--color_nine);
   font-size: 1em;
   background: transparent;
-  border-left: 2px solid #000;
-  border-bottom: 2px solid #000;
+  /* border-left: 2px solid #000; */
+  border-bottom: 2px solid var(--color_five);
   transition: 0.1s;
-  border-bottom-left-radius: 8px;
+  /* border-bottom-left-radius: 8px; */
   margin: 30px 0;
 }
 
@@ -255,7 +258,7 @@ button.goUp:hover{
   padding: 10px;
   pointer-events: none;
   font-size: 12px;
-  color: #000;
+  color: var(--color_five);
   text-transform: uppercase;
   transition: 0.5s;
   letter-spacing: 3px;
@@ -263,7 +266,9 @@ button.goUp:hover{
 }
 
 .signupModal form .inputBox input:valid~span,
-.signupModal form .inputBox input:focus~span {
+.signupModal form .inputBox input:focus~span,
+.signupModal form .inputBox1 input:valid~span,
+.signupModal form .inputBox1 input:focus~span {
   transform: translateX(113px) translateY(12.5px);
   font-size: 0.8em;
   padding: 5px 10px;
@@ -292,25 +297,98 @@ button.goUp:hover{
   border-radius: 8px;
 }
 
-.signupModal form button[type="submit"] {
+.signupModal form .inputBox1 select{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 10px;
+  width: 100%;
+  transition: 0.1s;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid var(--color_five);
+  margin: 30px 0;
+  font-size: 1em;
+  color: var(--color_nine);
+}
+.signupModal form .inputBox1 select option{
+  background-color: var(--color_four);
+  color: var(--color_nine);
+  padding: var(--padding_one);
+}
+.signupModal form .inputBox1 select:focus{
+  border: 2px solid var(--color_four);
+  border-radius: 8px;
+}
+.signupModal form .inputBox1 select:focus~span{
+  transform: translateX(156px) translateY(12.5px);
+  font-size: 0.8em;
+  padding: 5px 10px;
+  background: #000;
+  letter-spacing: 0.2em;
+  color: var(--color_nine);
+  border: 2px;
+}
+.signupModal form .hasAccount{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding_two);
+}
+.signupModal form .hasAccount #shiftToLogin{
+  text-decoration: none;
+  color: var(--color_three);
+  margin: var(--input_margins);
+}
+.signupModal form .hasAccount #shiftToLogin:hover{
+  color: var(--color_eight);
+  text-decoration: underline;
+}
+
+.signupModal form .buttonsDiv{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.signupModal form .buttonsDiv button{
   height: 45px;
   width: max-content;
   border-radius: 5px;
   border: 2px solid #000;
   cursor: pointer;
   background-color: transparent;
-  transition: 0.5s;
+  transition: .3s;
   text-transform: uppercase;
   font-size: 10px;
   letter-spacing: 2px;
-  margin-bottom: 3em;
+  margin: 3em;
+  padding: auto 100px;
+  border: none;
+  outline: none;
+}
+.signupModal form .buttonsDiv button:nth-child(1){
+  color: var(--color_eight);
+  background-color: var(--color_four);
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+}
+.signupModal form .buttonsDiv button:nth-child(2){
+  background-color: red;
 }
 
 .signupModal form button[type="submit"]:hover {
   background-color: var(--color_four);
-  color: white;
+  color: var(--color_three);
 }
-.signupModal .countries{
+.signupModal form button[type="button"]:hover {
+  background-color: rgb(221, 1, 1);
+}
+
+.signupModal .countriesDiv{
   position: fixed;
   width: max-content;
   height: 99px;
@@ -319,23 +397,26 @@ button.goUp:hover{
   float: left;
   top: 50px;
   left: 0;
-  background-color: red;
-  overflow: scroll;
-  z-index: 5;
+  background-color: var(--color_four);
+  overflow-y: scroll;
+  box-sizing: border-box;
+  border: 1px solid var(--color_nine);
+  border-radius: var(--border_radius);
 }
-.signupModal .countries button{
+.signupModal .countriesDiv button{
   position: relative;
-  height: calc(100% / 2);
+  height: calc(100% / 3);
   border: none;
-  background-color: #e3e3e3;
-  color: var(--color_four);
+  background-color: inherit;
+  color: var(--color_nine);
   outline: none;
   padding: var(--padding_one);
-  margin: var(--input_margins2);
-  box-shadow: 0 0 20px 1px black;
   display: grid;
   place-content: center;
-  border-radius: var(--border_radius);
+}
+.signupModal .countriesDiv button:hover{
+  background-color: var(--color_three);
+  color: var(--color_four);
 }
 
 
@@ -403,9 +484,9 @@ button.goUp:hover{
   padding: 10px 0;
   font-size: 16px;
   color: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 2px solid var(--color_five);
   outline: none;
   background: transparent;
 }
@@ -418,19 +499,31 @@ button.goUp:hover{
   color: var(--color_nine);
   pointer-events: none;
   transition: .5s;
-  font-size: 16px;
   opacity: .4;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-left: 10px;
 }
 
-.loginModal .loginFormPC input:focus ~ label {
-  top: -20px;
+.loginModal .loginFormPC input:focus ~ label, .loginModal .loginFormPC input:valid ~ label {
+  top: -25px;
   left: 0;
   color: #bdb8b8;
-  font-size: 12px;
+  font-size: 10px;
   opacity: 1;
 }
 
-.loginModal form button {
+.loginModal form .loginButtons {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.loginModal form .loginButtons button[type="submit"] {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -447,8 +540,30 @@ button.goUp:hover{
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
   letter-spacing: 4px;
 }
+.loginModal form .loginButtons button[type="button"] {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--color_nine);
+  border: none;
+  outline: none;
+  background-color: red;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: var(--transition_one);
+  margin-top: 40px;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  letter-spacing: 4px;
+  border-radius: var(--border_radius);
+}
+.loginModal form .loginButtons button[type="button"]:hover{
+  background-color: rgb(221, 1, 1);
+}
 
-.loginModal button:hover {
+
+.loginModal form .loginButtons button[type="submit"]:hover {
   background: #03f40f;
   color: #fff;
   border-radius: 5px;
@@ -458,7 +573,7 @@ button.goUp:hover{
               0 0 100px #03f40f;
 }
 
-.loginModal button span {
+.loginModal form .loginButtons button[type="submit"] span {
   position: absolute;
   display: block;
 }
@@ -473,7 +588,7 @@ button.goUp:hover{
   }
 }
 
-.loginModal button span:nth-child(1) {
+.loginModal form .loginButtons button[type="submit"] span:nth-child(1) {
   bottom: 2px;
   left: -100%;
   width: 100%;
@@ -498,23 +613,10 @@ button.goUp:hover{
   position: sticky;
   z-index: 3;
   top: 0;
-  box-shadow: 0 0 20px 0 rgb(202, 202, 202);
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
   transition: var(--transition_one);
 }
-.hasSearch .menuBtn{
-  width: 150px;
-  height: 50px;
-  border-radius: 5px;
-  border: none;
-  transition: all 0.5s ease-in-out;
-  font-size: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  background: #040f16;
-  color: #f5f5f5;
-}
+
 .hasSearch .menuBtn {
   width: 150px;
   height: 50px;
@@ -527,12 +629,13 @@ button.goUp:hover{
   display: flex;
   align-items: center;
   background: var(--color_four);
-  color: #f5f5f5;
+  color: var(--color_five);
   outline: 1px solid var(--color_four);
 }
 
 .hasSearch .menuBtn:hover {
   box-shadow: 0 0 20px 0px #2e2e2e3a;
+  transform: scaleX(.8);
 }
 
 .hasSearch .menuBtn .icon {
@@ -566,20 +669,16 @@ button.goUp:hover{
   transform: scale(0.85);
 }
 
-
-
-
-
-
 .hasSearch input{
   padding: var(--padding_two);
-  background-color: var(--color_one);
-  border: 1px solid var(--color_four);
+  background-color: transparent;
+  border: 1px solid var(--color_nine);
   border-radius: var(--border_radius);
+  color: var(--color_nine);
   outline: none;
 }
 .hasSearch input::placeholder{
-  color: var(--color_four);
+  color: var(--color_nine);
   font-style: italic;
   opacity: .35;
 }
@@ -599,7 +698,7 @@ button.goUp:hover{
 }
 .sideMenu nav{
   height: 100%;
-  background-color: var(--color_four);
+  background-color: var(--color_one);
   display: flex;
   flex-direction: column;
 }
@@ -608,14 +707,14 @@ button.goUp:hover{
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--color_four);
+  background-color: var(--color_one);
   border: none;
   outline: none;
   transition: 100ms;
   color: var(--color_one);
 }
 .sideMenu nav button .sideNavLinks{
-  color: var(--color_one);
+  color: var(--color_nine);
   text-decoration: none;
   transition: var(--transition_one);
   width: 100%;
@@ -635,14 +734,15 @@ button.goUp:hover{
   justify-content: end;
   width: 100%;
   padding-bottom: 30px;
+  background-color: var(--color_one);
 }
 .sideMenu .sideMenuOff span{
   padding: var(--padding_one);
   font-size: 30px;
-  color: var(--color_one);
+  color: red;
 }
 .sideMenu .sideMenuOff span:hover{
-  color: red;
+  color: rgb(241, 1, 1);
 }
 
 
@@ -792,7 +892,7 @@ button.goUp:hover{
   box-sizing: border-box;
   justify-content: space-evenly;
   align-items: center;
-  background-color: var(--color_one);
+  background-color: var(--color_nine);
 }
 
 /* Market place divs*/
@@ -807,13 +907,13 @@ button.goUp:hover{
   display: flex;
   flex-direction: column;
   align-items: center;
-  outline: 5px groove black;
+  outline: 1.5px solid var(--color_four);
   padding: var(--padding_one);
   transition:.3s ease all;
   z-index: 2;
   background-color: var(--color_one);
   box-sizing: border-box;
-  box-shadow: 0 0 10px 2px rgb(181, 181, 181);
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
 #renderMarket .imageDiv:hover{
   transform: scale(0.98);
@@ -823,7 +923,6 @@ button.goUp:hover{
   position: relative;
   width: 100%;
   border-radius: var(--border_radius);
-  mix-blend-mode: darken;
 }
 #renderMarket .imageDiv .title{
   text-align:center;
@@ -833,6 +932,7 @@ button.goUp:hover{
   display: grid;
   place-content: center;
   font-weight: bolder;
+  color: black;
 }
 #renderMarket .imageDiv .div1{
   position: relative;
@@ -875,11 +975,12 @@ button.goUp:hover{
   width: 90%;
   border-radius: var(--border_radius);
   background-color: black;
-  color: var(--color_one);
+  color: var(--color_nine);
   transition: var(--transition_one);
 }
 #renderMarket .imageDiv .buyButton:hover{
   transform: var(--transform);
+  color: var(--color_eight);
 }
 
 #renderMarket .imageDiv .pricesDiv{
@@ -892,10 +993,10 @@ button.goUp:hover{
 }
 #renderMarket .imageDiv .pricesDiv .oldPrice{
   text-decoration: line-through;
-  color: var(--color_eight);
+  color: var(--color_six);
 }
 #renderMarket .imageDiv .pricesDiv .newPrice{
-  color: black;
+  color: var(--color_eight);
 }
 
 #renderMarket .imageDiv .priceDiscount{
@@ -905,7 +1006,7 @@ button.goUp:hover{
   top: 0;
   background-color: var(--color_eight);
   height: 20px;
-  border-radius: 10px;
+  border-bottom-left-radius: 10px;
   padding: 0 var(--padding_one);
   width: max-content;
   padding: none;
@@ -915,6 +1016,9 @@ button.goUp:hover{
 #renderMarket .imageDiv .priceDiscount p{
   position: relative;
 }
+
+
+
 .searchResult{
   color: green;
 }
@@ -926,19 +1030,20 @@ button.goUp:hover{
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #1a1c22e2;
+  background-color: #000000dd;
   place-items: center;
   z-index: 5;
 }
 .actionCannotComplete .innerActionCannotComplete{
-  background-color: var(--color_one);
+  background-color: black;
   padding: 50px;
   border-radius: 10px;
   display: grid;
   place-items: center;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
 .actionCannotComplete .innerActionCannotComplete p{
-  color: var(--color_four);
+  color: var(--color_five);
 }
 .actionCannotComplete .innerActionCannotComplete p a{
   color: var(--color_three);

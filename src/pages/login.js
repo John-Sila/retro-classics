@@ -25,6 +25,11 @@ const Login = () => {
         }
     }
 
+    // cancel login
+    const CancelLogin = () =>{
+        window.location.pathname = "/";
+    }
+
     return(
         <>
             <div className="mainLog" id="mainLog">
@@ -32,21 +37,22 @@ const Login = () => {
                     <span><h4>Retro Classics</h4></span>
                     <form action="http://localhost:8080/login/submission" method="post" id="loginForm" className="">
                         <div class="loginFormPC">
-                            <input type="text" name="" required="" />
+                            <input type="text" name="" required />
                             <label>Username</label>
                         </div>
 
                         <div class="loginFormPC">
-                            <input type="password" name="" required="" />
+                            <input type="password" name="" required />
                             <label>Password</label>
                         </div>
 
                         <span>Don't have an account?</span>
                         <span><a href="/signup">Create Account.</a></span>
 
-                        <center>
-                            <button>submit<span></span></button>
-                        </center>
+                        <div className="loginButtons">
+                            <button type="submit">submit<span></span></button>
+                            <button type="button" onClick={CancelLogin}>Cancel<span></span></button>
+                        </div>
                     </form>
                 </div>
             </div>

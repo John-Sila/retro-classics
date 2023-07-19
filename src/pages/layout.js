@@ -1,6 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
 import "../App.css";
-import { MdMenu } from "react-icons/md";
 import { MdShoppingBasket, MdCancel } from "react-icons/md";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
@@ -149,6 +148,7 @@ const Layout = () => {
     }
 
     // search results
+    // currently not working
     const searchResults = event => {
         const searchInput = event.target.value.toString().toLowerCase();
         const titleParagraphs = document.getElementsByClassName("titleParagraph");

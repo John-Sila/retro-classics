@@ -43,7 +43,7 @@ function DefaultComponent() {
     } else {
       // scrolled up...set [top] to the default.
       topNav.style.top = "";
-      hasSearch.style.top = thisTopNaveight + "px";
+      hasSearch.style.top = (thisTopNaveight - 5) + "px";
     }
     CurrentScroll = window.scrollY;
 

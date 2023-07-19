@@ -59,39 +59,65 @@ const Market = () => {
             // perform discount evaluation
             let ItemOldPrice = Items[i].oldPrice;
             let ItemNewPrice = Items[i].newPrice;
-            // replacing the commas and spaces
-            ItemOldPrice = ItemOldPrice.toString().replace(",", "").replace(" ", "");
-            ItemNewPrice = ItemNewPrice.toString().replace(",", "").replace(" ", "");
-            // convert to type Number
-            ItemOldPrice = parseFloat(ItemOldPrice)
-            ItemNewPrice = parseFloat(ItemNewPrice)
-            // eval
-            const priceDifference = ItemOldPrice - ItemNewPrice;
-            let discount = (priceDifference / ItemOldPrice) * 100;
-            discount = Math.round(discount, 1);
-            discountPara.innerHTML = discount + "% discount";
-            discountDiv.appendChild(discountPara);
+            ItemOldPrice = ItemOldPrice.toString();
+           
+            if (ItemOldPrice !== "") {
+                // replacing the commas and spaces
+                ItemOldPrice = ItemOldPrice.toString().replace(",", "").replace(" ", "");
+                ItemNewPrice = ItemNewPrice.toString().replace(",", "").replace(" ", "");
+                // convert to type Number
+                ItemOldPrice = parseFloat(ItemOldPrice)
+                ItemNewPrice = parseFloat(ItemNewPrice)
+                // eval
+                const priceDifference = ItemOldPrice - ItemNewPrice;
+                let discount = (priceDifference / ItemOldPrice) * 100;
+                discount = Math.round(discount, 1);
+                discountPara.innerHTML = discount + "% discount";
+                discountDiv.appendChild(discountPara);
 
-            // create a section for prices
-            const pricesDiv = document.createElement("div");
-            const oldPrice = document.createElement("p");
-            const newPrice = document.createElement("p");
-            pricesDiv.classList.add("pricesDiv")
-            oldPrice.classList.add("oldPrice");
-            oldPrice.innerHTML = `Ksh. ${Items[i].oldPrice}`;
-            newPrice.innerHTML = `Now Ksh. ${Items[i].newPrice}`;
-            newPrice.classList.add("newPrice");
-            pricesDiv.appendChild(oldPrice);
-            pricesDiv.appendChild(newPrice);
+                // create a section for prices
+                const pricesDiv = document.createElement("div");
+                const oldPrice = document.createElement("p");
+                const newPrice = document.createElement("p");
+                pricesDiv.classList.add("pricesDiv");
+                oldPrice.classList.add("oldPrice");
+                oldPrice.innerHTML = `Ksh. ${Items[i].oldPrice}`;
+                
+                newPrice.innerHTML = `Now Ksh. ${Items[i].newPrice}`;
+                newPrice.classList.add("newPrice");
+                pricesDiv.appendChild(oldPrice);
+                pricesDiv.appendChild(newPrice);
+                
+                // append general
+                imageDiv.appendChild(img);
+                imageDiv.appendChild(discountDiv);
+                imageDiv.appendChild(titleParagraph);
+                imageDiv.appendChild(pricesDiv);
+                imageDiv.appendChild(div1);
+                imageDiv.appendChild(button3)
+                market.appendChild(imageDiv);
+            } else {
+                // we do not have an old price
+                discountPara.innerHTML = "New Offer!";
+                discountDiv.appendChild(discountPara)
+                // discountDiv.style.display = "none";
+                ItemNewPrice = ItemNewPrice.toString().replace(" ", "");
+                const newPrice = document.createElement("p");
+                newPrice.classList.add("newPrice")
+                const pricesDiv = document.createElement("div");
+                newPrice.innerHTML = `Ksh. ${ItemNewPrice}`;
+                pricesDiv.appendChild(newPrice);
+                pricesDiv.classList.add("pricesDiv")
 
-            // append general
-            imageDiv.appendChild(img);
-            imageDiv.appendChild(discountDiv);
-            imageDiv.appendChild(titleParagraph);
-            imageDiv.appendChild(pricesDiv);
-            imageDiv.appendChild(div1);
-            imageDiv.appendChild(button3)
-            market.appendChild(imageDiv);
+                // append general
+                imageDiv.appendChild(img);
+                imageDiv.appendChild(discountDiv);
+                imageDiv.appendChild(titleParagraph);
+                imageDiv.appendChild(pricesDiv);
+                imageDiv.appendChild(div1);
+                imageDiv.appendChild(button3);
+                market.appendChild(imageDiv);
+            }
         }
     })
 
