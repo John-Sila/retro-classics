@@ -8,33 +8,8 @@ const Layout = () => {
     
     const [actions, setActions] = useState(false); // engaged on hovers above the myPage link
     const [mouseActions, setMouseActions] = useState(0); // for when the mouse is on the actions div. We want to know when it leaves.
-    const [alternations, setAlternations] = useState(false); // if true, page is logged in
     var coord_one_ref = useRef(null);
     var coord_two_ref = useRef(null);
-
-    // for alternating the three Links
-    useEffect( () => {
-        
-        const signupLink = document.getElementById("signupLink");
-        const loginLink = document.getElementById("loginLink");
-        const mypageLink = document.getElementById("mypageLink");
-        const shoppingBasket = document.getElementById("shoppingBasket");
-        
-        if (alternations) {
-            signupLink.style.display = "none";
-            loginLink.style.display = "none";
-            mypageLink.style.display = "block";
-            shoppingBasket.style.display = "block";
-            return;
-
-        } else {
-            signupLink.style.display = "block";
-            loginLink.style.display = "block";
-            mypageLink.style.display = "none";
-            shoppingBasket.style.display = "none";
-        }
-        
-    }, [alternations])
 
     let actionsWidth;
     // set an alt
@@ -91,30 +66,6 @@ const Layout = () => {
     const mouseLeftActionsDiv = () => {
         setMouseActions( mouseActions => 0 )
         window.removeEventListener( "click", ClickedActions )
-    }
-
-    // when we log in correctly, the page reloads(backend order). let's check the new pathname.
-    useEffect( () => {
-        const Href = window.location.pathname;
-        if (Href === "/mypage") {
-            setAlternations(true)
-        }
-    }, [])
-
-    const LogOut = () => {
-        // we are logged out
-        setAlternations( alternations => false )
-
-        // initiate server side action
-        const myXML = new XMLHttpRequest();
-        myXML.open("POST", "http://localhost:8080/user/logout");
-        myXML.onreadystatechange = () => {
-            if (myXML.readyState === 4 && myXML.status === 200) {
-                console.log("Usuário desconectado!");
-            }
-        }
-        myXML.send();
-        
     }
 
     const windowClicked = event => {
@@ -220,16 +171,16 @@ const Layout = () => {
                     <ul>
 
                         <li>
-                            <Link to="/signup" className="links" id="signupLink">Sign Up</Link>
+                            <Link to="/signup" className="links linksOne" id="signupLink">Sign Up</Link>
                         </li>
                         <li>
-                            <Link to="/login" className="links" id="loginLink">Login</Link>
+                            <Link to="/login" className="links linksOne" id="loginLink">Login</Link>
                         </li>
                         <li>
-                            <span id="shoppingBasket">< MdShoppingBasket/><sup id="basketCount"><sup>0</sup></sup></span>
+                            <span id="shoppingBasket" className="linksTwo">< MdShoppingBasket/><sup id="basketCount"><sup>0</sup></sup></span>
                         </li>
                         <li>
-                            <Link to="/mypage" className="links" id="mypageLink" onMouseEnter={MyPageHovered} onMouseLeave={mouseLeftActions}>Mypage</Link>
+                            <Link to="/mypage" className="links linksTwo" id="mypageLink" onMouseEnter={MyPageHovered} onMouseLeave={mouseLeftActions}>Mypage</Link>
                         </li>
 
                     </ul>
@@ -252,31 +203,27 @@ const Layout = () => {
 
             <div className="actions" id="actionsDiv" onMouseEnter={mouseOnActionsDiv} onMouseLeave={mouseLeftActionsDiv}>
 
-                <ul>
-                    <li>    
+                <nav>
+                    <button>    
                         <Link to="" className="actionLinks">My Account</Link>
-                    </li>
+                    </button>
 
-                    <li>    
+                    <button>    
                         <Link to="" className="actionLinks">Become a seller</Link>
-                    </li>
+                    </button>
 
-                    <li>
-                        <Link to="" className="actionLinks">All accounts</Link>
-                    </li>
+                    <button>
+                        <Link to="" className="actionLinks">Transactions & Activity</Link>
+                    </button>
 
-                    <li>    
+                    <button>    
                         <Link to="" className="actionLinks">Sign out</Link>
-                    </li>
+                    </button>
 
-                    <li>    
-                        <Link to="" className="actionLinks">Log into another account</Link>
-                    </li>
-
-                    <li>    
-                        <Link to="" className="actionLinks" onClick={LogOut}>Log out</Link>
-                    </li>
-                </ul>
+                    <button id="logsOut">    
+                        <Link to="" className="actionLinks">Log out</Link>
+                    </button>
+                </nav>
 
             </div>
 

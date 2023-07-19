@@ -6,15 +6,48 @@ import namedCountries from "../scripts/countries";
 const Signup = () => {
     const [formIsValid, setFormIsValid] = useState(false);
     const [countries, setCountries] = useState(false);
-    // const [lastTopPosition, setLastTopPosition] = useState(0);
-    // const [topCountries, setTopCountries] = useState(1);
+    const [loggedIn, setLoggedIn] = useState(false);
 
     // know when form can be submitted
     useEffect( () => {
         if(formIsValid){
             document.getElementsByTagName("form")[0].submit();
+            // perform changes to the topNav
+            setLoggedIn(true);
         }
     }, [formIsValid])
+
+    // user is logged in
+    useEffect( () => {
+        if (loggedIn /**true */) {
+            const topNav = document.getElementById("topNav");
+            const firstLinks = topNav.querySelectorAll(".linksOne");
+            const secondLinks = topNav.querySelectorAll(".linksTwo");
+            if (firstLinks && secondLinks) {
+                for (let int = 0; int < firstLinks.length; int++) {
+                    firstLinks[int].style.display = "none";
+                }
+                for (let int = 0; int < secondLinks.length; int++) {
+                    secondLinks[int].style.display = "block";
+                }
+            }
+        }
+        
+        if (!loggedIn /**false */) {
+            const topNav = document.getElementById("topNav");
+            const firstLinks = topNav.querySelectorAll(".linksOne");
+            const secondLinks = topNav.querySelectorAll(".linksTwo");
+            if (firstLinks && secondLinks) {
+                for (let int = 0; int < firstLinks.length; int++) {
+                    firstLinks[int].style.display = "block";
+                }
+                for (let int = 0; int < secondLinks.length; int++) {
+                    secondLinks[int].style.display = "none";
+                }
+            }
+        }
+            
+    }, [loggedIn] /**listen to the change. */)
 
     // VALIDATE FORM DATA
     const ValidateData = event => {
@@ -193,7 +226,7 @@ const Signup = () => {
     return(
         <>
         <div class="signupModal" id="signupModal">
-            <form class="card" action="http://localhost/signup/submission/" onSubmit={ValidateData}>
+            <form class="card" action="http://localhost:8080/signup/submission" method="post" onSubmit={ValidateData}>
                 <p class="signup">Retro Classics: Sign Up</p>
 
                 <div className="mainForm">
@@ -223,10 +256,10 @@ const Signup = () => {
                     <div className="right">
 
                         <div class="inputBox1">
-                            <select name="SelectCountry" id="Country" onChange={countryChanged} >
+                            <select name="Country" id="Country" onChange={countryChanged} >
                                 <option value=""></option>
-                                <option value="254">Kenya</option>
-                                <option value="230">Nigeria</option>
+                                <option value="Kenya">Kenya</option>
+                                <option value="Nigeria">Nigeria</option>
                             </select>
                             <span class="user">Country</span>
                         </div>

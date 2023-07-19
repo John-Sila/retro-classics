@@ -12,18 +12,62 @@ import { useEffect, useState } from "react";
 import Market from "./pages/market";
 
 function DefaultComponent() {
-
-  const [shouldRenderSignup, setShouldRenderSignup] = useState(true);
-  const [shouldRenderLogin, setShouldRenderLogin] = useState(true);
-  const [shouldRenderMypage, setShouldRenderMypage] = useState(false);
-  
-  let allElements;
+  const [loggedIn, setLoggedIn] = useState(false);
   
   useEffect( () => {
-    window.addEventListener( "load", ListenPopstate );
     window.addEventListener( "scroll", ListenScroll );
-  });
+    
+    if (window.location.pathname === "/mypage") {
+      setLoggedIn(true)
+      return;
+    }
+    if (window.location.pathname !== "/mypage") {
+      setLoggedIn(false)
+      return;
+    }
+  }, []);
+
+  // the event listener for logging in
+  useEffect( () => {
+    const topNav = document.getElementById("topNav");
+    const firstLinks = topNav.querySelectorAll(".linksOne");
+    const secondLinks = topNav.querySelectorAll(".linksTwo");
+
+    if (firstLinks && secondLinks) {
+      if (loggedIn /**true */) {
+        for (let int = 0; int < firstLinks.length; int++) {
+          // we dont want these
+          firstLinks[int].style.display = "none";
+        }
+        for (let int = 0; int < secondLinks.length; int++) {
+          // we dont want these
+          secondLinks[int].style.display = "block";
+        }
+        const logsOut = document.getElementById("logsOut");
+        if (logsOut) {
+          logsOut.addEventListener( "click", LogOut )
+        }
+      }
   
+      if (loggedIn /**false */) {
+        for (let int = 0; int < firstLinks.length; int++) {
+          // we dont want these
+          firstLinks[int].style.display = "block";
+        }
+        for (let int = 0; int < secondLinks.length; int++) {
+          // we dont want these
+          secondLinks[int].style.display = "none";
+        }
+      }
+    }
+
+  }, [loggedIn])
+
+  // logging out
+  const LogOut = () => {
+    setLoggedIn(false);
+  }
+
   // when client scrolls up, move the topNav app by (it's own height) px, and vice versa.
   let CurrentScroll = window.scrollY;
   const ListenScroll = () => {
@@ -87,74 +131,20 @@ function DefaultComponent() {
 
   }, [])
 
-  
-  const ListenPopstate = () => {
-    const pathname = window.location.pathname;
-    allElements = document.getElementById("topNav");
-    
-    if ( pathname !== "/mypage") {
-      // this is not where we want to land.
-      setShouldRenderLogin( () => true)
-      setShouldRenderSignup( () => true)
-      setShouldRenderMypage( () => false)
-      
-      SetRenders(false);
-      
-      window.removeEventListener( "load", ListenPopstate );
-      return; // the function can just stop executing.
-    }
-    // we have successfully logged in.
-    // we are actually in mypage now.
-    if ( allElements ) {
-      // let's act on this
-
-      setShouldRenderMypage( () => true);
-      setShouldRenderLogin( () => false);
-      setShouldRenderSignup( () => false);
-
-      SetRenders(true);
-
-    }
-  }
-
-  const SetRenders = parameter => {
-    const signupLink = allElements.querySelector("#signupLink");
-    const mypageLink = allElements.querySelector("#mypageLink");
-    const loginLink = allElements.querySelector("#loginLink");
-
-    if ( parameter === true ) {
-      signupLink.style.display = "none";
-      loginLink.style.display = "none";
-      mypageLink.style.display = "";
-      return;
-    }
-    signupLink.style.display = "";
-    loginLink.style.display = "";
-    mypageLink.style.display = "none";
-
-  }
-
   // to distinguish mobile phones from others
   function isMobile() {
     return /**boolean */ /Android|webOS|iPod|iPad|iPhone|mobi|IEMobile|Opera Mini|BlackBerry/i.test(navigator.userAgent);
   }
-  if (isMobile()) {
+  const Device = isMobile();
+  if (Device) {
     // true( is a mobile phone)
     setPhoneStds();
-  } else {
+  } else if (!Device) {
     // false this is not a mobile phone ===> probably a laptop, PC etc
   }
   function setPhoneStds() {
     // set styles ...esp the account forms.
     // signup form
-    const signupForm = document.getElementById("signupForm");
-    signupForm.classList.remove("signupFormPC");
-    signupForm.classList.add("signupFormMobile");
-
-    // login form
-    const loginModal = document.getElementById("loginModal");
-    loginModal.classList.remove("loginFormPC");
-    loginModal.classList.add("loginFormMobile");
   }
 
   return(

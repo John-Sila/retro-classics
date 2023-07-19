@@ -1,22 +1,12 @@
 import { Link } from "react-router-dom";
 import "../App.css";
 import { useEffect, useState } from "react";
-import { MdRemoveRedEye } from "react-icons/md";
 
 const Login = () => {
 
-    // const [showPassword, setShowPassword] = useState(false);
-    // useEffect( () => {
-    //     const passwordInput = document.getElementById("loginPassword");
-    //     if (showPassword) {
-    //         passwordInput.setAttribute("type", "text");
-    //     } else {
-    //         passwordInput.setAttribute("type", "password");
-    //     }
-    // }, [showPassword]);
-    
     useEffect( () => {
         window.addEventListener( "click", windowClicked );
+        window.addEventListener( "popstate", PathChanged )
     }, []);
     
     const windowClicked = event => {
@@ -30,6 +20,14 @@ const Login = () => {
         window.location.pathname = "/";
     }
 
+    // popstate
+    const PathChanged = () => {
+        alert(true)
+        if (window.location.pathname === "/mypage") {
+            alert(true);
+        }
+    }
+
     return(
         <>
             <div className="mainLog" id="mainLog">
@@ -37,12 +35,12 @@ const Login = () => {
                     <span><h4>Retro Classics</h4></span>
                     <form action="http://localhost:8080/login/submission" method="post" id="loginForm" className="">
                         <div class="loginFormPC">
-                            <input type="text" name="" required />
-                            <label>Username</label>
+                            <input type="text" name="Email" required />
+                            <label>Email</label>
                         </div>
 
                         <div class="loginFormPC">
-                            <input type="password" name="" required />
+                            <input type="password" name="Password" required />
                             <label>Password</label>
                         </div>
 

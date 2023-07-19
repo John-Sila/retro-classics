@@ -152,6 +152,12 @@ button.goUp:hover{
 .topNav .topNavRight ul li span sup{
   color: var(--color_three);
 }
+.topNav .topNavRight ul .linksOne{
+  display: block;
+}
+.topNav .topNavRight ul .linksTwo{
+  display: none;
+}
 
 /* default divs...where they render */
 .renderDivs{
@@ -751,30 +757,45 @@ button.goUp:hover{
   background-color: var(--color_one);
   display: none;
   position: absolute;
-  outline: 2px groove var(--color_four);
+  outline: 2px solid var(--color_four);
+  overflow: hidden;
   box-sizing: border-box;
-  padding: 5px 10px;
   border-radius: var(--border_radius);
-  z-index: 3;
+  z-index: 4;
   height: max-content;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  transition: var(--transition_one);
 }
 
-.actions ul{
+.actions nav{
   display: flex;
   flex-direction: column;
   list-style: none;
   box-sizing: border-box;
 }
-
-.actions ul li .actionLinks{
+.actions nav button{
+  padding: var(--padding_one);
+  background-color: var(--color_four);
+}
+.actions nav button:first-child{
+  border-top-left-radius: var(--border_radius);
+  border-top-right-radius: var(--border_radius);
+}
+.actions nav button:last-child{
+  border-bottom-left-radius: var(--border_radius);
+  border-bottom-right-radius: var(--border_radius);
+}
+.actions nav button .actionLinks{
   transition: var(--transition_one);
   text-decoration: none;
-  color: var(--color_four);
+  color: var(--color_five);
   margin: var(--padding_one);
   
 }
-.actions ul li .actionLinks:hover{
+.actions nav button:hover .actionLinks{
   color: var(--color_three);
+  font-weight: bolder;
+  letter-spacing: 3px;
 }
 
 .renderDivs{

@@ -21,11 +21,12 @@ beta.use(bodyParser.urlencoded( { extended : true } )); // get the data from tha
 beta.use(bodyParser.json()); // make it json() so we can do a dot-formation access.
 
 beta.post("/signup/submission", ( req, res ) => {
-    const { Email, Username, Password, Country, Mobilenumber } = req.body;
+    const { Email, FullName, Password, Country, MobileNumber } = req.body;
+
     const BasketQuantity = 0;
     const BasketItems = "";
     const sqlQuery = "INSERT INTO retroclassics (Email, FullName, Password, Country, MobileNumber, BasketQuantity, BasketItems) VALUES?";
-    const Values = [ [Email, Username, Password, Country, Mobilenumber, BasketQuantity, BasketItems] ];
+    const Values = [ [Email, FullName, Password, Country, MobileNumber, BasketQuantity, BasketItems] ];
     alpha.query(sqlQuery, [Values], ( err, result ) => {
         if( err ) throw err.sqlMessage;
         console.log("Data has been successfully saved to database 'Polygon' into table 'retroclassics'.");
@@ -33,13 +34,14 @@ beta.post("/signup/submission", ( req, res ) => {
     })
 })
 
-let email, password;
-let loggedIn = false;
+// let email, password;
+// let loggedIn = false;
 beta.post("/login/submission", ( req, res ) => {
     // Let's know if this person has an account
-    email = req.body.email;
-    password = req.body.password;
-    const sqlQuery = `SELECT * FROM retroclassics WHERE Email = '${email}' AND Password = '${password}'`;
+    // email = req.body.email;
+    // password = req.body.password;
+    const { Email, Password } = req.body;
+    const sqlQuery = `SELECT * FROM retroclassics WHERE Email = '${Email}' AND Password = '${Password}'`;
     alpha.query( sqlQuery, ( err, result ) => {
         if( err ) {
             console.log( err );
@@ -48,12 +50,11 @@ beta.post("/login/submission", ( req, res ) => {
             // we have a result
             if( result.length > 0 ) {
                 // we are good so let's get a username
-                const sqlQuery2 = `SELECT CustomerName FROM retroclassics WHERE Email = '${email}' AND Password = '${password}'`;
+                const sqlQuery2 = `SELECT FullName FROM retroclassics WHERE Email = '${Email}' AND Password = '${Password}'`;
                 alpha.query( sqlQuery2, ( err, result ) => {
                     if( err ) throw err.sqlMessage;
-                    const Username = result.map(User => User.CustomerName);
+                    const Username = result.map(User => User.FullName);
                     console.log(Username, " has been logged in.");
-                    loggedIn = !loggedIn;
                     return res.redirect("http://localhost:3000/mypage")
                 })
 

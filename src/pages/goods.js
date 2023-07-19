@@ -92,8 +92,8 @@ const Items = [
     {
         id: "eleven11",
         src: "https://extramile.thehartford.com/wp-content/uploads/2019/11/Most-Valuable-Antiques.jpg",
-        title: "Trasure Chest",
-        alt: "Trasure Chest",
+        title: "Treasure Chest",
+        alt: "Treasure Chest",
         oldPrice: "346,000",
         newPrice: "280,500",
         sellerTel: "0717405109",
